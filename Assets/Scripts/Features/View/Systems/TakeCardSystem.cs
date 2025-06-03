@@ -14,13 +14,13 @@ namespace Features.View.Systems
         private Filter _cardsFilter;
         private Event<CardTakenEvent> _cardTakenEvent;
         private Filter _deckFilter;
+        private Stash<FaceUpTag> _faceUpTag;
         private Stash<OrderComponent> _order;
 
         private Stash<OwnerComponent> _owner;
 
         private Filter _playerTag;
         private Request<TakeCardRequest> _request;
-        private Stash<FaceUpTag> _faceUpTag;
 
         public World World { get; set; }
 

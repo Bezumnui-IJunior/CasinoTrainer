@@ -6,7 +6,7 @@ namespace View
     public class DealerViewConfig : ScriptableObject, IDealerViewConfig
     {
         [SerializeField] private float _cardDealDuration;
-        [SerializeField]  private float _cardRotateDuration;
+        [SerializeField] private float _cardRotateDuration;
         [SerializeField] private float _cardGetUpDuration;
         [SerializeField] private Vector3 _cardFaceUpAngle;
         [SerializeField] private Vector3 _cardFaceDownAngle;
@@ -15,7 +15,6 @@ namespace View
         [SerializeField] private float _cardWidth = 0.33f;
         [SerializeField] private float _firstCardOffsetXFactor = -3;
         [SerializeField] private float _cardOffsetXFactor = 0.5f;
-        
 
         public float CardDealDuration => _cardDealDuration;
         public float CarRotateDuration => _cardRotateDuration;

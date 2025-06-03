@@ -932,7 +932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 26.75}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1032797975
@@ -1585,6 +1585,7 @@ MonoBehaviour:
   _scoreView: {fileID: 1032797975}
   _playerViewConfig: {fileID: 11400000, guid: 71ab1d3480e30124da0aa2646f3fabc1, type: 2}
   _dealerViewConfig: {fileID: 11400000, guid: 1f49aeba52ff0dc4db47030dad442cf9, type: 2}
+  _dealerConfig: {fileID: 11400000, guid: 49c43e06c8c024c9fbab32fc9ff97802, type: 2}
 --- !u!4 &1824414942
 Transform:
   m_ObjectHideFlags: 0

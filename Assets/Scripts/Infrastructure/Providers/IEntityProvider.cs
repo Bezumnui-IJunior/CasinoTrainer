@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Scellecs.Morpeh;
+using UnityEngine;
 
 namespace Infrastructure.Providers
 {
@@ -6,5 +7,6 @@ namespace Infrastructure.Providers
     {
         // ReSharper disable once InconsistentNaming
         public GameObject gameObject { get; }
+        Entity Entity { get; }
     }
 }

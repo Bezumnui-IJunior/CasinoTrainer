@@ -1,5 +1,4 @@
 ﻿using Features.BlackJack.Services;
-using Features.BlackJack.Systems;
 using Features.View.Systems;
 using Scellecs.Morpeh.Addons.Feature;
 using VContainer;
@@ -10,9 +9,9 @@ namespace Features.View
 {
     public class ViewFeature : UpdateFeature
     {
-        private readonly IScoreView _scoreView;
-        private readonly IScoreCalculator _scoreCalculator;
         private readonly IPlayerViewConfig _playerViewConfig;
+        private readonly IScoreCalculator _scoreCalculator;
+        private readonly IScoreView _scoreView;
 
         [Inject]
         public ViewFeature(IScoreView scoreView, IScoreCalculator scoreCalculator, IPlayerViewConfig playerViewConfig)

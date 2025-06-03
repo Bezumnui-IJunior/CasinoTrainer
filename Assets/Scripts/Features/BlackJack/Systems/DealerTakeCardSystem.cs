@@ -1,4 +1,5 @@
 ﻿using Features.BlackJack.Components;
+using Features.BlackJack.Configs;
 using Features.BlackJack.Services;
 using Features.View.Components;
 using Scellecs.Morpeh;
@@ -13,13 +14,16 @@ namespace Features.BlackJack.Systems
     {
         private const int HiddenCard = 2;
         private readonly IScoreCalculator _scoreCalculator;
-        private Stash<ShouldTakeCardTag> _allowedToTakeCardTag;
+        private readonly IDealerConfig _dealerConfig;
+        private Stash<ShouldTakeCardTag> _shouldTakeCardTag;
         private Filter _filter;
         private Request<TakeCardRequest> _takeCardRequest;
+        private Stash<TakeCardTimerComponent> _takeCardTimer;
 
-        public DealerTakeCardSystem(IScoreCalculator scoreCalculator)
+        public DealerTakeCardSystem(IScoreCalculator scoreCalculator, IDealerConfig dealerConfig)
         {
             _scoreCalculator = scoreCalculator;
+            _dealerConfig = dealerConfig;
         }
 
         public World World { get; set; }
@@ -27,21 +31,27 @@ namespace Features.BlackJack.Systems
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<CardHolderTag>()
                 .With<ShouldTakeCardTag>()
+                .With<CardHolderTag>()
                 .With<DealerTag>()
                 .Build();
 
-            _allowedToTakeCardTag = World.GetStash<ShouldTakeCardTag>();
+            _shouldTakeCardTag = World.GetStash<ShouldTakeCardTag>();
             _takeCardRequest = World.GetRequest<TakeCardRequest>();
+            _takeCardTimer = World.GetStash<TakeCardTimerComponent>();
         }
 
         public void OnUpdate(float deltaTime)
         {
             foreach (Entity owner in _filter)
             {
-                _takeCardRequest.Publish(new TakeCardRequest(owner, _scoreCalculator.GetTotalCardsCount(owner) == HiddenCard - 1));
-                _allowedToTakeCardTag.Remove(owner);
+                int totalCards = _scoreCalculator.GetTotalCardsCount(owner);
+
+                if (totalCards == 0)
+                    _takeCardTimer.Add(owner).Value = _dealerConfig.TakeCardTimeout;
+
+                _takeCardRequest.Publish(new TakeCardRequest(owner, totalCards == HiddenCard - 1));
+                _shouldTakeCardTag.Remove(owner);
             }
         }
 

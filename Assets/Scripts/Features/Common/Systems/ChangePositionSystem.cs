@@ -1,5 +1,4 @@
-﻿using System;
-using Features.Common.Components;
+﻿using Features.Common.Components;
 using Features.EntityViewFactory.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
@@ -11,9 +10,9 @@ namespace Features.Common.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class ChangePositionSystem : ISystem
     {
+        private Stash<ChangePositionComponent> _changePositionComponent;
         private Filter _filter;
         private Stash<ViewComponent> _view;
-        private Stash<ChangePositionComponent> _changePositionComponent;
         public World World { get; set; }
 
         public void OnAwake()

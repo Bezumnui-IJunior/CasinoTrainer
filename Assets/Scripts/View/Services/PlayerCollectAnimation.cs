@@ -1,5 +1,4 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using VContainer;
@@ -12,13 +11,13 @@ namespace View.Services
     public class PlayerCollectAnimation : IPlayerCollectAnimation
     {
         private const float CardOffsetY = 0.001f;
+        private readonly Quaternion _faceDownRotation;
+
+        private readonly Quaternion _faceUpRotation;
 
         private readonly IPlayerViewConfig _playerViewConfig;
-        
-        private readonly Quaternion _faceUpRotation;
         private readonly Quaternion _showRotation;
-        private readonly Quaternion _faceDownRotation;
-        
+
         [Inject]
         public PlayerCollectAnimation(IPlayerViewConfig playerViewConfig)
         {
@@ -40,12 +39,11 @@ namespace View.Services
                 .Append(card.DOMove(destination, _playerViewConfig.CardDealDuration));
 
             Sequence rotationSequence = DOTween.Sequence().Append(card.DORotateQuaternion(_showRotation, _playerViewConfig.CardShowDuration));
-            
+
             if (isFaceUp)
                 rotationSequence.Append(card.DORotateQuaternion(_faceUpRotation, _playerViewConfig.CardDealDuration));
             else
                 rotationSequence.Append(card.DORotateQuaternion(_faceDownRotation, _playerViewConfig.CardDealDuration));
         }
-
     }
 }

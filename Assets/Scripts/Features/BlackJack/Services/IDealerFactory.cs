@@ -1,7 +1,9 @@
-﻿namespace Features.BlackJack.Services
+﻿using Scellecs.Morpeh;
+
+namespace Features.BlackJack.Services
 {
     public interface IDealerFactory
     {
-        void CreateDealer();
+        Entity CreateDealer();
     }
 }

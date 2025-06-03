@@ -6,7 +6,7 @@ namespace View.Services
     public class DealerCollectAnimation : IDealerCollectAnimation
     {
         private const float CardOffsetY = 0.001f;
-        
+
         private readonly Quaternion _cardFaceDownAngle;
         private readonly Quaternion _cardFaceDownRotation;
         private readonly Quaternion _cardFaceUpAngle;
@@ -33,7 +33,7 @@ namespace View.Services
                 .Append(card.DOMove(card.position + _dealerViewConfig.CardPathCenter, _dealerViewConfig.CardGetUpDuration).OnComplete(() => RotateCard(card, isFaceUp)))
                 .Append(card.DOMove(destination, _dealerViewConfig.CardDealDuration));
         }
-        
+
         private void RotateCard(Transform card, bool isFaceUp)
         {
             if (isFaceUp)

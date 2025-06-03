@@ -14,14 +14,14 @@ namespace Features.Card.Services
     public class DeckFactory : MonoBehaviour, IDeckFactory
     {
         [SerializeField] private EntityProvider _cardPrefab;
-        
+        private Stash<ChangePositionComponent> _changePositionComponent;
+
         private Stash<DenominalComponent> _denominal;
+        private Stash<OrderComponent> _order;
+        private Stash<OwnerComponent> _owner;
         private Stash<SetAppearTag> _setAppearTag;
         private Stash<SuitComponent> _suit;
         private Stash<ViewPrefabComponent> _viewPrefab;
-        private Stash<OwnerComponent> _owner;
-        private Stash<ChangePositionComponent> _changePositionComponent;
-        private Stash<OrderComponent> _order;
 
         private void Awake()
         {
@@ -34,7 +34,6 @@ namespace Features.Card.Services
             _owner = world.GetStash<OwnerComponent>();
             _changePositionComponent = world.GetStash<ChangePositionComponent>();
             _order = world.GetStash<OrderComponent>();
-
         }
 
         public Entity CreateCard(World world, Denominations denominal, Suits suit, Entity deck, int order)
@@ -50,6 +49,5 @@ namespace Features.Card.Services
 
             return entity;
         }
-
     }
 }

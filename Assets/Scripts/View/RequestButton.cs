@@ -1,5 +1,4 @@
-﻿using Features.View.Components;
-using Scellecs.Morpeh;
+﻿using Scellecs.Morpeh;
 using UnityEngine;
 using UnityEngine.UI;
 

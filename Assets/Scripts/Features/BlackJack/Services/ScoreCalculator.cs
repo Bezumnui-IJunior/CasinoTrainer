@@ -16,6 +16,8 @@ namespace Features.BlackJack.Services
 
         private readonly Filter _cardsAnyFilter;
 
+        private readonly Filter _cardsFaceUpFilter;
+
         private readonly Stash<DenominalComponent> _denominal;
         private readonly List<Denominations> _denominations = new List<Denominations>(52);
 
@@ -39,8 +41,6 @@ namespace Features.BlackJack.Services
             [Denominations.King] = 10,
         };
 
-        private readonly Filter _cardsFaceUpFilter;
-
         public ScoreCalculator()
         {
             World world = World.Default!;
@@ -50,7 +50,7 @@ namespace Features.BlackJack.Services
                 .With<DenominalComponent>()
                 .With<FaceUpTag>()
                 .Build();
-            
+
             _cardsAnyFilter = world.Filter
                 .With<OwnerComponent>()
                 .With<DenominalComponent>()

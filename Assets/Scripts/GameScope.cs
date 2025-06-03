@@ -1,4 +1,5 @@
 ﻿using Features.BlackJack;
+using Features.BlackJack.Configs;
 using Features.BlackJack.Services;
 using Features.Card;
 using Features.Card.Services;
@@ -24,6 +25,7 @@ public class GameScope : LifetimeScope
     private PlayerViewConfig _playerViewConfig;
 
     [SerializeField] private DealerViewConfig _dealerViewConfig;
+    [SerializeField] private DealerConfig _dealerConfig;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -35,6 +37,7 @@ public class GameScope : LifetimeScope
 
         builder.RegisterInstance(_playerViewConfig).As<IPlayerViewConfig>();
         builder.RegisterInstance(_dealerViewConfig).As<IDealerViewConfig>();
+        builder.RegisterInstance(_dealerConfig).As<IDealerConfig>();
         builder.RegisterInstance(_deckFactory).As<IDeckFactory>();
     }
 

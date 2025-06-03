@@ -5,5 +5,6 @@ namespace Infrastructure.Providers
     public interface IComponentsProvider
     {
         void Initialize(Entity entity, World world);
+        virtual void Deinitialize() {}
     }
 }

@@ -18,7 +18,5 @@ namespace Features.View.Components
             HasRequestee = true;
             HideCard = hideCard;
         }
-
-    
     }
 }

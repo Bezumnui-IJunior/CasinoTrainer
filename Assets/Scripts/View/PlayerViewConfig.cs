@@ -16,7 +16,6 @@ namespace View
         [SerializeField] private float _payerFirstCardOffsetXFactor = -3;
         [SerializeField] private float _cardOffsetXFactor = 0.5f;
 
-
         public float CardDealDuration => _cardDealDuration;
 
         public float CardShowDuration => _cardShowDuration;
@@ -27,6 +26,5 @@ namespace View
         public Vector3 PlayerHandsPosition => _playerHandsPosition;
         public float PayerFirstCardOffsetX => _payerFirstCardOffsetXFactor * _cardWidth;
         public float CardOffsetX => _cardOffsetXFactor * _cardWidth;
-        
     }
 }

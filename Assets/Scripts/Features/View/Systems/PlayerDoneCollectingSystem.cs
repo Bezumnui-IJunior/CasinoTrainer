@@ -1,5 +1,4 @@
-﻿using System;
-using Features.BlackJack.Components;
+﻿using Features.BlackJack.Components;
 using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
@@ -11,9 +10,9 @@ namespace Features.View.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class PlayerDoneCollectingSystem : ISystem
     {
-        private Request<PlayerDoneCollectingRequest> _request;
-        private Filter _dealerFilter;
         private Stash<ShouldTakeCardTag> _allowedToTakeCardTag;
+        private Filter _dealerFilter;
+        private Request<PlayerDoneCollectingRequest> _request;
         public World World { get; set; }
 
         public void OnAwake()

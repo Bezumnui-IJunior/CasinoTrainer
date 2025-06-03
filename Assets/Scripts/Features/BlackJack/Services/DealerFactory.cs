@@ -11,12 +11,12 @@ namespace Features.BlackJack.Services
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DealerFactory : IDealerFactory
     {
-        private readonly World _world;
         private readonly IDealerCollectAnimation _animation;
+        private readonly Stash<CollectAnimationComponent> _animationComponent;
         private readonly Stash<CardHolderTag> _cardHolderTag;
         private readonly Stash<DealerTag> _dealerTag;
         private readonly Stash<ScoreComponent> _score;
-        private readonly Stash<CollectAnimationComponent> _animationComponent;
+        private readonly World _world;
 
         public DealerFactory(World world, IDealerCollectAnimation animation)
         {
@@ -26,16 +26,17 @@ namespace Features.BlackJack.Services
             _cardHolderTag = _world.GetStash<CardHolderTag>();
             _score = _world.GetStash<ScoreComponent>();
             _animationComponent = _world.GetStash<CollectAnimationComponent>();
-            
         }
 
-        public void CreateDealer()
+        public Entity CreateDealer()
         {
             Entity entity = _world.CreateEntity();
             _dealerTag.Add(entity);
             _cardHolderTag.Add(entity);
             _score.Add(entity);
             _animationComponent.Add(entity).Value = _animation;
+
+            return entity;
         }
     }
 }

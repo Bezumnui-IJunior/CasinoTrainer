@@ -1,5 +1,4 @@
 ﻿using Features.EntityViewFactory.Components;
-using JetBrains.Annotations;
 using Scellecs.Morpeh;
 using TriInspector;
 using Unity.IL2CPP.CompilerServices;
@@ -14,9 +13,7 @@ namespace Infrastructure.Providers
     {
         [ShowInInspector] private Entity _entity;
         private bool _isInit;
-
-        [ReadOnly] public int EntityId { get; private set; }
-
+        public Entity Entity => _entity;
         public void SetEntity(Entity entity)
         {
             if (_isInit)
@@ -24,17 +21,18 @@ namespace Infrastructure.Providers
 
             _isInit = true;
             _entity = entity;
-            EntityId = _entity.Id;
             _entity.GetWorld().GetStash<ViewComponent>().Add(_entity).Value = this;
-            
 
-            foreach (IComponentsProvider registrar in GetComponentsInChildren<IComponentsProvider>())
-                registrar.Initialize(_entity, _entity.GetWorld());
+            foreach (IComponentsProvider provider in GetComponentsInChildren<IComponentsProvider>())
+                provider.Initialize(_entity, _entity.GetWorld());
         }
 
         [ContextMenu("Destroy")]
         public void Destroy()
         {
+            foreach (IComponentsProvider provider in GetComponentsInChildren<IComponentsProvider>())
+                provider.Deinitialize();
+            
             _entity.GetWorld().RemoveEntity(_entity);
             Destroy(gameObject);
         }

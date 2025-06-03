@@ -1,13 +1,13 @@
-﻿using Scellecs.Morpeh;
+using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
-namespace Features.EntityViewFactory.Components
+namespace Features.BlackJack.Components
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct ViewPathComponent : IComponent
+    public struct TakeCardTimerComponent : IComponent
     {
-        public string Value;
+        public float Value;
     }
 }

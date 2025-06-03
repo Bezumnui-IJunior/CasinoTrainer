@@ -6,7 +6,6 @@ using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
-using View.Services;
 
 namespace Features.View.Systems
 {
@@ -15,15 +14,14 @@ namespace Features.View.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class CardCollectAnimationSystem : ISystem
     {
-
         private readonly IScoreCalculator _scoreCalculator;
-        private Event<CardTakenEvent> _cardTakenEvent;
         private Filter _cardFilter;
-        private Filter _ownerFilter;
-        private Stash<OwnerComponent> _owner;
-        private Stash<ViewComponent> _view;
+        private Event<CardTakenEvent> _cardTakenEvent;
         private Stash<CollectAnimationComponent> _collectAnimation;
         private Stash<FaceUpTag> _faceUpTag;
+        private Stash<OwnerComponent> _owner;
+        private Filter _ownerFilter;
+        private Stash<ViewComponent> _view;
 
         public CardCollectAnimationSystem(IScoreCalculator scoreCalculator)
         {
@@ -44,7 +42,6 @@ namespace Features.View.Systems
                 .With<CollectAnimationComponent>()
                 .Build();
 
-            
             _cardTakenEvent = World.GetEvent<CardTakenEvent>();
             _view = World.GetStash<ViewComponent>();
             _owner = World.GetStash<OwnerComponent>();
@@ -69,7 +66,7 @@ namespace Features.View.Systems
                 Transform transform = _view.Get(card).Value.transform;
 
                 int cardsCount = _scoreCalculator.GetTotalCardsCount(owner.Value);
-               
+
                 _collectAnimation.Get(owner.Value).Value.OnCollect(transform, cardsCount, _faceUpTag.Has(card));
             }
         }

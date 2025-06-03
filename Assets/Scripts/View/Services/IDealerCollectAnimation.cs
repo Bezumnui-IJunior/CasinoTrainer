@@ -1,9 +1,4 @@
-﻿using DG.Tweening;
-using UnityEngine;
-
-namespace View.Services
+﻿namespace View.Services
 {
-    public interface IDealerCollectAnimation : ICollectAnimation
-    {
-    }
+    public interface IDealerCollectAnimation : ICollectAnimation { }
 }
