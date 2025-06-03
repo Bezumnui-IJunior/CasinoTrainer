@@ -1,4 +1,5 @@
 ﻿using Features.BlackJack.Services;
+using Features.BlackJack.Systems;
 using Features.View.Systems;
 using Scellecs.Morpeh.Addons.Feature;
 using VContainer;
@@ -23,10 +24,8 @@ namespace Features.View
 
         protected override void Initialize()
         {
-            AddSystem(new TakeCardSystem());
             AddSystem(new CardCollectAnimationSystem(_scoreCalculator));
             AddSystem(new UpdateViewScore(_scoreView));
-            AddSystem(new PlayerDoneCollectingSystem());
         }
     }
 }

@@ -16,7 +16,6 @@ namespace Features.View.Systems
     {
         private readonly IScoreCalculator _scoreCalculator;
         private Filter _cardFilter;
-        private Event<CardTakenEvent> _cardTakenEvent;
         private Stash<CollectAnimationComponent> _collectAnimation;
         private Stash<FaceUpTag> _faceUpTag;
         private Stash<OwnerComponent> _owner;
@@ -33,16 +32,11 @@ namespace Features.View.Systems
         public void OnAwake()
         {
             _cardFilter = World.Filter
+                .With<TakenTag>()
                 .With<ViewComponent>()
                 .With<OwnerComponent>()
                 .Build();
 
-            _ownerFilter = World.Filter
-                .With<CardHolderTag>()
-                .With<CollectAnimationComponent>()
-                .Build();
-
-            _cardTakenEvent = World.GetEvent<CardTakenEvent>();
             _view = World.GetStash<ViewComponent>();
             _owner = World.GetStash<OwnerComponent>();
             _collectAnimation = World.GetStash<CollectAnimationComponent>();
@@ -51,23 +45,18 @@ namespace Features.View.Systems
 
         public void OnUpdate(float deltaTime)
         {
-            foreach (CardTakenEvent cardTakenEvent in _cardTakenEvent.publishedChanges)
+            foreach (Entity taken in _cardFilter)
             {
-                Entity card = cardTakenEvent.Entity;
+                ref OwnerComponent owner = ref _owner.Get(taken);
 
-                if (_cardFilter.Has(card) == false)
+                if (_collectAnimation.Has(owner.Value) == false)
                     continue;
 
-                ref OwnerComponent owner = ref _owner.Get(card);
-
-                if (_ownerFilter.Has(owner.Value) == false)
-                    continue;
-
-                Transform transform = _view.Get(card).Value.transform;
+                Transform transform = _view.Get(taken).Value.transform;
 
                 int cardsCount = _scoreCalculator.GetTotalCardsCount(owner.Value);
 
-                _collectAnimation.Get(owner.Value).Value.OnCollect(transform, cardsCount, _faceUpTag.Has(card));
+                _collectAnimation.Get(owner.Value).Value.OnCollect(transform, cardsCount, _faceUpTag.Has(taken));
             }
         }
 

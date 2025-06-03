@@ -9,19 +9,20 @@ namespace Infrastructure.Providers
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public abstract class ComponentsProvider : MonoBehaviour, IComponentsProvider
     {
-        private Entity _entity;
-        private World _world;
+        protected Entity Entity { get; private set; }
+
+        protected World World { get; private set; }
 
         public void Initialize(Entity entity, World world)
         {
-            _entity = entity;
-            _world = entity.GetWorld();
+            Entity = entity;
+            World = entity.GetWorld();
             OnInitialize();
         }
 
         protected abstract void OnInitialize();
 
         public ref T AddToStash<T>() where T : struct, IComponent =>
-            ref _world.GetStash<T>().Add(_entity);
+            ref World.GetStash<T>().Add(Entity);
     }
 }

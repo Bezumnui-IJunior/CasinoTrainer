@@ -13,11 +13,10 @@ namespace Features.BlackJack.Systems
     public class RecalculateScoreSystem : ISystem
     {
         private readonly IScoreCalculator _scoreCalculator;
-        private Event<CardTakenEvent> _cardTakenEvent;
-        private Filter _holderFilter;
-
+        private Stash<CardHolderTag> _cardHolderTag;
         private Stash<OwnerComponent> _owner;
         private Stash<ScoreComponent> _score;
+        private Filter _filter;
 
         public RecalculateScoreSystem(IScoreCalculator scoreCalculator)
         {
@@ -28,28 +27,23 @@ namespace Features.BlackJack.Systems
 
         public void OnAwake()
         {
-            _holderFilter = World.Filter
-                .With<CardHolderTag>()
-                .With<ScoreComponent>()
+            _filter = World.Filter
+                .With<TakenTag>()
+                .With<OwnerComponent>()
                 .Build();
 
             _owner = World.GetStash<OwnerComponent>();
             _score = World.GetStash<ScoreComponent>();
-            _cardTakenEvent = World.GetEvent<CardTakenEvent>();
+            _cardHolderTag = World.GetStash<CardHolderTag>();
         }
 
         public void OnUpdate(float deltaTime)
         {
-            foreach (CardTakenEvent cardTakenEvent in _cardTakenEvent.publishedChanges)
+            foreach (Entity taken in _filter)
             {
-                Entity card = cardTakenEvent.Entity;
+                Entity owner = _owner.Get(taken).Value;
 
-                if (_owner.Has(card) == false)
-                    continue;
-
-                Entity owner = _owner.Get(card).Value;
-
-                if (_holderFilter.Has(owner) == false)
+                if (_score.Has(owner) == false || _cardHolderTag.Has(owner) == false)
                     continue;
 
                 _score.Get(owner).Value = _scoreCalculator.GetSumOfHolder(owner);

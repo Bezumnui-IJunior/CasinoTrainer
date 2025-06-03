@@ -29,6 +29,7 @@ namespace Features.BlackJack.Systems
         {
             Entity entity = _dealerFactory.CreateDealer();
             World.GetStash<TakeCardTimerComponent>().Add(entity).Value = _dealerConfig.FirstCardTimeout;
+            World.GetStash<TurnHolderTag>().Add(entity);
         }
 
         public void Dispose() { }

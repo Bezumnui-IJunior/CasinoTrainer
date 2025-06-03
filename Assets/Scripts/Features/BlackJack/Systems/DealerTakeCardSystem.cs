@@ -1,7 +1,6 @@
 ﻿using Features.BlackJack.Components;
 using Features.BlackJack.Configs;
 using Features.BlackJack.Services;
-using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
@@ -15,9 +14,9 @@ namespace Features.BlackJack.Systems
         private const int HiddenCard = 2;
         private readonly IScoreCalculator _scoreCalculator;
         private readonly IDealerConfig _dealerConfig;
-        private Stash<ShouldTakeCardTag> _shouldTakeCardTag;
+        private Stash<DealerTakeCardTag> _delaerTakeCardTag;
         private Filter _filter;
-        private Request<TakeCardRequest> _takeCardRequest;
+        private Stash<ShouldTakeCardTag> _takeCardRequest;
         private Stash<TakeCardTimerComponent> _takeCardTimer;
 
         public DealerTakeCardSystem(IScoreCalculator scoreCalculator, IDealerConfig dealerConfig)
@@ -31,13 +30,14 @@ namespace Features.BlackJack.Systems
         public void OnAwake()
         {
             _filter = World.Filter
-                .With<ShouldTakeCardTag>()
+                .With<TurnHolderTag>()
+                .With<DealerTakeCardTag>()
                 .With<CardHolderTag>()
                 .With<DealerTag>()
                 .Build();
 
-            _shouldTakeCardTag = World.GetStash<ShouldTakeCardTag>();
-            _takeCardRequest = World.GetRequest<TakeCardRequest>();
+            _delaerTakeCardTag = World.GetStash<DealerTakeCardTag>();
+            _takeCardRequest = World.GetStash<ShouldTakeCardTag>();
             _takeCardTimer = World.GetStash<TakeCardTimerComponent>();
         }
 
@@ -50,8 +50,9 @@ namespace Features.BlackJack.Systems
                 if (totalCards == 0)
                     _takeCardTimer.Add(owner).Value = _dealerConfig.TakeCardTimeout;
 
-                _takeCardRequest.Publish(new TakeCardRequest(owner, totalCards == HiddenCard - 1));
-                _shouldTakeCardTag.Remove(owner);
+                _takeCardRequest.Add(owner).ShouldHide = totalCards == HiddenCard - 1;
+                
+                _delaerTakeCardTag.Remove(owner);
             }
         }
 

@@ -1,5 +1,4 @@
 using Features.BlackJack.Components;
-using Features.BlackJack.Configs;
 using Scellecs.Morpeh;
 
 namespace Features.BlackJack.Systems
@@ -7,10 +6,10 @@ namespace Features.BlackJack.Systems
     public class DealerShouldTakeCardTimerSystem : ISystem
     {
         
-        private Stash<ShouldTakeCardTag> _shouldTakeCardTag;
+        private Stash<DealerTakeCardTag> _dealerTakeCardTag;
         private Stash<TakeCardTimerComponent> _takeCardTimer;
         private Filter _filter;
-        
+
         public World World { get; set; }
 
         public void OnAwake()
@@ -20,7 +19,7 @@ namespace Features.BlackJack.Systems
                 .With<TakeCardTimerComponent>()
                 .Build();
             
-            _shouldTakeCardTag = World.GetStash<ShouldTakeCardTag>();
+            _dealerTakeCardTag = World.GetStash<DealerTakeCardTag>();
             _takeCardTimer = World.GetStash<TakeCardTimerComponent>();
         }
 
@@ -35,7 +34,7 @@ namespace Features.BlackJack.Systems
                 if (timer.Value - deltaTime > 0)
                     continue;
 
-                _shouldTakeCardTag.Add(entity);
+                _dealerTakeCardTag.Add(entity);
                 _takeCardTimer.Remove(entity);
             }
         }

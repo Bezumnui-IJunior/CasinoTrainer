@@ -2,8 +2,9 @@
 using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
+using ShouldTakeCardTag = Features.BlackJack.Components.ShouldTakeCardTag;
 
-namespace Features.View.Systems
+namespace Features.BlackJack.Systems
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]

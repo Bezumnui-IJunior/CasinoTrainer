@@ -4,7 +4,7 @@ using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
-namespace Features.View.Systems
+namespace Features.BlackJack.Systems
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
@@ -12,15 +12,15 @@ namespace Features.View.Systems
     public class TakeCardSystem : ISystem
     {
         private Filter _cardsFilter;
-        private Event<CardTakenEvent> _cardTakenEvent;
+        private Stash<TakenTag> _cardTakenTag;
         private Filter _deckFilter;
         private Stash<FaceUpTag> _faceUpTag;
         private Stash<OrderComponent> _order;
 
         private Stash<OwnerComponent> _owner;
 
-        private Filter _playerTag;
-        private Request<TakeCardRequest> _request;
+        private Filter _cardHolderFilter;
+        private Stash<ShouldTakeCardTag> _shouldTakeCardTag;
 
         public World World { get; set; }
 
@@ -28,9 +28,10 @@ namespace Features.View.Systems
 
         public void OnAwake()
         {
-            _playerTag = World.Filter
+            _cardHolderFilter = World.Filter
+                .With<ShouldTakeCardTag>()
                 .With<CardHolderTag>()
-                .With<PlayerTag>()
+                .With<TurnHolderTag>()
                 .Build();
 
             _deckFilter = World.Filter
@@ -47,49 +48,36 @@ namespace Features.View.Systems
 
             _owner = World.GetStash<OwnerComponent>();
             _order = World.GetStash<OrderComponent>();
-            _request = World.GetRequest<TakeCardRequest>();
-            _cardTakenEvent = World.GetEvent<CardTakenEvent>();
+            _shouldTakeCardTag = World.GetStash<ShouldTakeCardTag>();
+            _cardTakenTag = World.GetStash<TakenTag>();
             _faceUpTag = World.GetStash<FaceUpTag>();
         }
 
         public void OnUpdate(float deltaTime)
         {
-            foreach (TakeCardRequest request in _request.Consume())
-            {
-                if (request.HasRequestee)
-                    GiveCardToNewOwner(request.Requestee, request.HideCard);
-                else
-                    GiveCardToPlayer();
-            }
-        }
-
-        private void GiveCardToPlayer()
-        {
-            foreach (Entity player in _playerTag)
-                GiveCardToNewOwner(player, false);
+            foreach (Entity taker in _cardHolderFilter)
+                GiveCardToNewOwner(taker, _shouldTakeCardTag.Get(taker).ShouldHide);
         }
 
         private void GiveCardToNewOwner(Entity newOwner, bool shouldHideCard)
         {
             foreach (Entity deck in _deckFilter)
+            foreach (Entity card in _cardsFilter)
             {
-                foreach (Entity card in _cardsFilter)
-                {
-                    ref OwnerComponent owner = ref _owner.Get(card);
-                    ref OrderComponent order = ref _order.Get(card);
+                ref OwnerComponent owner = ref _owner.Get(card);
+                ref OrderComponent order = ref _order.Get(card);
 
-                    if (owner.Value.Id != deck.Id)
-                        continue;
+                if (owner.Value.Id != deck.Id)
+                    continue;
 
-                    if (order.Value-- != 0)
-                        continue;
+                if (order.Value-- != 0)
+                    continue;
 
-                    if (shouldHideCard == false)
-                        _faceUpTag.Add(card);
+                if (shouldHideCard == false)
+                    _faceUpTag.Add(card);
 
-                    owner.Value = newOwner;
-                    _cardTakenEvent.NextFrame(new CardTakenEvent(card));
-                }
+                owner.Value = newOwner;
+                _cardTakenTag.Add(card);
             }
         }
     }

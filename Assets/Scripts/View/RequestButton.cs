@@ -1,18 +1,15 @@
-﻿using Scellecs.Morpeh;
+﻿using Infrastructure.Providers;
+using Scellecs.Morpeh;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace View
 {
-    public class RequestButton<T> : MonoBehaviour where T : struct, IRequestData
+    public abstract class RequestButton<T> : ComponentsProvider where T : struct, IComponent
     {
         [SerializeField] private Button _button;
-        private Request<T> _takeCardRequest;
 
-        private void Awake()
-        {
-            _takeCardRequest = World.Default.GetRequest<T>();
-        }
+        protected Stash<T> Stash { get; private set; }
 
         private void OnEnable()
         {
@@ -24,9 +21,19 @@ namespace View
             _button.onClick.RemoveListener(OnButtonClick);
         }
 
-        private void OnButtonClick()
+        protected abstract void OnButtonClick();
+
+        protected override void OnInitialize()
         {
-            _takeCardRequest.Publish(new T());
+            Stash = World.Default.GetStash<T>();
+        }
+
+        protected ref T CreateTagEntity()
+        {
+            Entity entity = World.Default.CreateEntity();
+            ref T component = ref Stash.Add(entity);
+
+            return ref component;
         }
     }
 }

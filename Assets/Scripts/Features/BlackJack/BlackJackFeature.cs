@@ -35,9 +35,14 @@ namespace Features.BlackJack
             AddInitializer(new DeckInitializeSystem(_deckFactory));
             AddInitializer(new PlayerInitializeSystem(_playerCollectAnimation));
             AddInitializer(new DealerInitializeSystem(_dealerFactory, _dealerConfig));
+            
             AddSystem(new DealerShouldTakeCardTimerSystem());
             AddSystem(new DealerTakeCardSystem(_scoresCalculator, _dealerConfig));
+            AddSystem(new TakeCardSystem());
+            
             AddSystem(new RecalculateScoreSystem(_scoresCalculator));
+            
+            AddSystem(new CardTakenCleanup());
         }
     }
 }

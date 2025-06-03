@@ -13,10 +13,10 @@ namespace Features.View.Systems
     public class UpdateViewScore : ISystem
     {
         private readonly IScoreView _scoreView;
-        private Event<CardTakenEvent> _cardTakenEvent;
         private Stash<OwnerComponent> _owner;
         private Stash<PlayerTag> _playerTag;
         private Stash<ScoreComponent> _score;
+        private Filter _filter;
 
         public UpdateViewScore(IScoreView scoreView)
         {
@@ -27,7 +27,11 @@ namespace Features.View.Systems
 
         public void OnAwake()
         {
-            _cardTakenEvent = World.GetEvent<CardTakenEvent>();
+            _filter = World.Filter
+                .With<TakenTag>()
+                .With<OwnerComponent>()
+                .Build();
+            
             _playerTag = World.GetStash<PlayerTag>();
             _score = World.GetStash<ScoreComponent>();
             _owner = World.GetStash<OwnerComponent>();
@@ -35,14 +39,9 @@ namespace Features.View.Systems
 
         public void OnUpdate(float deltaTime)
         {
-            foreach (CardTakenEvent cardTakenEvent in _cardTakenEvent.publishedChanges)
+            foreach (Entity taken in _filter)
             {
-                Entity card = cardTakenEvent.Entity;
-
-                if (_owner.Has(card) == false)
-                    continue;
-
-                Entity owner = _owner.Get(card).Value;
+                Entity owner = _owner.Get(taken).Value;
 
                 if (_playerTag.Has(owner) == false || _score.Has(owner) == false)
                     continue;

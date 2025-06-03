@@ -6,8 +6,5 @@ namespace Features.BlackJack.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct ShouldTakeCardTag : IComponent
-    {
-        public bool ShouldHide;
-    }
+    public struct DealerTakeCardTag : IComponent { }
 }
