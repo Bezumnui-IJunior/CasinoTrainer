@@ -8,9 +8,11 @@ namespace Features.BlackJack.Systems
     public class CardTakenCleanup : ICleanupSystem
     {
         private Filter _takenFilter;
-        private Stash<ShouldTakeCardTag> _shouldTakeCard;
+        private Stash<TakeCardRequestTag> _shouldTakeCard;
         private Stash<TakenTag> _cardTakenTag;
         private Filter _shouldTakeFilter;
+        private Stash<PlayerConsumeRequestTag> _playerConsumerTag;
+        private Filter _playerConsumerFilter;
         public World World { get; set; }
 
         public void OnAwake()
@@ -18,13 +20,18 @@ namespace Features.BlackJack.Systems
             _takenFilter = World.Filter
                 .With<TakenTag>()
                 .Build();
-            
+
             _shouldTakeFilter = World.Filter
-                .With<ShouldTakeCardTag>()
+                .With<TakeCardRequestTag>()
+                .Build();
+
+            _playerConsumerFilter = World.Filter
+                .With<PlayerConsumeRequestTag>()
                 .Build();
 
             _cardTakenTag = World.GetStash<TakenTag>();
-            _shouldTakeCard = World.GetStash<ShouldTakeCardTag>();
+            _shouldTakeCard = World.GetStash<TakeCardRequestTag>();
+            _playerConsumerTag = World.GetStash<PlayerConsumeRequestTag>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -34,6 +41,9 @@ namespace Features.BlackJack.Systems
 
             foreach (Entity entity in _takenFilter)
                 _cardTakenTag.Remove(entity);
+
+            foreach (Entity entity in _playerConsumerFilter)
+                _playerConsumerTag.Remove(entity);
         }
 
         public void Dispose() { }

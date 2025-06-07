@@ -1,15 +1,19 @@
-﻿using Infrastructure.Providers;
-using Scellecs.Morpeh;
+﻿using Scellecs.Morpeh;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace View
 {
-    public abstract class RequestButton<T> : ComponentsProvider where T : struct, IComponent
+    public abstract class RequestButton<T> : MonoBehaviour where T : struct, IComponent
     {
         [SerializeField] private Button _button;
 
         protected Stash<T> Stash { get; private set; }
+
+        private void Awake()
+        {
+            Stash = World.Default.GetStash<T>();
+        }
 
         private void OnEnable()
         {
@@ -22,11 +26,6 @@ namespace View
         }
 
         protected abstract void OnButtonClick();
-
-        protected override void OnInitialize()
-        {
-            Stash = World.Default.GetStash<T>();
-        }
 
         protected ref T CreateTagEntity()
         {

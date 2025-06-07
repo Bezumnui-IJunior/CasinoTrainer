@@ -2,6 +2,7 @@ using DG.Tweening;
 using Features.BlackJack;
 using Features.Card;
 using Features.Common;
+using Features.Dealer;
 using Features.EntityViewFactory;
 using Features.View;
 using Infrastructure;
@@ -17,15 +18,17 @@ public class EcsEntryPoint : MonoBehaviour
 
     private void Start()
     {
+        int order = 0;
         DOTween.Init();
         _world = World.Default;
-
+        
         _world
-            .AddFeature(0, _factory.Create<EntityViewFactoryFeature>())
-            .AddFeature(1, _factory.Create<BlackJackFeature>())
-            .AddFeature(2, _factory.Create<CardFeature>())
-            .AddFeature(3, _factory.Create<CommonFeatures>())
-            .AddFeature(4, _factory.Create<ViewFeature>());
+            .AddFeature(++order, _factory.Create<CommonFeatures>())
+            .AddFeature(++order, _factory.Create<EntityViewFactoryFeature>())
+            .AddFeature(++order, _factory.Create<DealerFeature>())
+            .AddFeature(++order, _factory.Create<CardFeature>())
+            .AddFeature(++order, _factory.Create<BlackJackFeature>())
+            .AddFeature(++order, _factory.Create<ViewFeature>());
     }
 
     [Inject]

@@ -1,10 +1,8 @@
 using Features.BlackJack.Components;
-using Features.View.Components;
-using Scellecs.Morpeh;
 
 namespace View
 {
-    public class TakeCardButton : RequestButton<ShouldTakeCardTag>
+    public class TakeCardButton : RequestButton<PlayerConsumeRequestTag>
     {
         protected override void OnButtonClick() =>
             CreateTagEntity();

@@ -12,15 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f07cf088d9941b79338f57d9604c35b, type: 3}
   m_Name: ViewConfig
   m_EditorClassIdentifier: 
+  _cardViewConfig: {fileID: 11400000, guid: e56d2db71f65f4e4ea7f51b06b6531d6, type: 2}
   _cardDealDuration: 0.5
   _cardShowDuration: 1
-  _cardTakeYOffset: 1
-  _cardTime: 1
   _cardShowAngle: 60
   _cardFaceUpAngle: 90
   _cardFaceDownAngle: -90
   _cardShowCenter: {x: 0, y: 0.8, z: -1}
   _playerHandsPosition: {x: 0, y: 0, z: -1}
-  _cardWidth: 0.33
   _payerFirstCardOffsetXFactor: -1.5
   _cardOffsetXFactor: 0.5

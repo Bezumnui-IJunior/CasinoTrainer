@@ -28,7 +28,7 @@ namespace Features.BlackJack.Systems
         public void OnAwake()
         {
             Entity deck = World.CreateEntity();
-            World.GetStash<CardHolderTag>().Add(deck);
+            World.GetStash<CardHolderComponent>().Add(deck);
             World.GetStash<DeckTag>().Add(deck);
 
             int orderIndex = 0;

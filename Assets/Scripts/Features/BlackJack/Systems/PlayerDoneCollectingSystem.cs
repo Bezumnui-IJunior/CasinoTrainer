@@ -1,8 +1,8 @@
 ﻿using Features.BlackJack.Components;
+using Features.Dealer.Components;
 using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
-using ShouldTakeCardTag = Features.BlackJack.Components.ShouldTakeCardTag;
 
 namespace Features.BlackJack.Systems
 {
@@ -11,7 +11,7 @@ namespace Features.BlackJack.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class PlayerDoneCollectingSystem : ISystem
     {
-        private Stash<ShouldTakeCardTag> _allowedToTakeCardTag;
+        private Stash<TakeCardRequestTag> _allowedToTakeCardTag;
         private Filter _dealerFilter;
         private Request<PlayerDoneCollectingRequest> _request;
         public World World { get; set; }
@@ -19,11 +19,11 @@ namespace Features.BlackJack.Systems
         public void OnAwake()
         {
             _dealerFilter = World.Filter
-                .With<CardHolderTag>()
+                .With<CardHolderComponent>()
                 .With<DealerTag>()
                 .Build();
 
-            _allowedToTakeCardTag = World.GetStash<ShouldTakeCardTag>();
+            _allowedToTakeCardTag = World.GetStash<TakeCardRequestTag>();
             _request = World.GetRequest<PlayerDoneCollectingRequest>();
         }
 

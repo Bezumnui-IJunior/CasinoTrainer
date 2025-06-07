@@ -1,4 +1,5 @@
-﻿using Features.Common.Systems;
+﻿using Features.BlackJack.Systems;
+using Features.Common.Systems;
 using Scellecs.Morpeh.Addons.Feature;
 
 namespace Features.Common
@@ -7,6 +8,9 @@ namespace Features.Common
     {
         protected override void Initialize()
         {
+            AddInitializer(new TurnHolderInitializeSystem());
+            
+            AddSystem(new AddTurnHolderSystem());
             AddSystem(new ChangePositionSystem());
         }
     }

@@ -11,16 +11,15 @@ namespace Features.BlackJack.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class TakeCardSystem : ISystem
     {
+        private Filter _cardHolderFilter;
         private Filter _cardsFilter;
         private Stash<TakenTag> _cardTakenTag;
         private Filter _deckFilter;
         private Stash<FaceUpTag> _faceUpTag;
         private Stash<OrderComponent> _order;
-
         private Stash<OwnerComponent> _owner;
-
-        private Filter _cardHolderFilter;
-        private Stash<ShouldTakeCardTag> _shouldTakeCardTag;
+        private Stash<TakeCardRequestTag> _shouldTakeCardTag;
+        private Stash<CardHolderComponent> _cardHolder;
 
         public World World { get; set; }
 
@@ -29,14 +28,13 @@ namespace Features.BlackJack.Systems
         public void OnAwake()
         {
             _cardHolderFilter = World.Filter
-                .With<ShouldTakeCardTag>()
-                .With<CardHolderTag>()
-                .With<TurnHolderTag>()
+                .With<TakeCardRequestTag>()
+                .With<CardHolderComponent>()
                 .Build();
 
             _deckFilter = World.Filter
                 .With<DeckTag>()
-                .With<CardHolderTag>()
+                .With<CardHolderComponent>()
                 .Build();
 
             _cardsFilter = World.Filter
@@ -48,9 +46,11 @@ namespace Features.BlackJack.Systems
 
             _owner = World.GetStash<OwnerComponent>();
             _order = World.GetStash<OrderComponent>();
-            _shouldTakeCardTag = World.GetStash<ShouldTakeCardTag>();
+            _shouldTakeCardTag = World.GetStash<TakeCardRequestTag>();
             _cardTakenTag = World.GetStash<TakenTag>();
             _faceUpTag = World.GetStash<FaceUpTag>();
+            _cardHolder = World.GetStash<CardHolderComponent>();
+
         }
 
         public void OnUpdate(float deltaTime)
@@ -73,10 +73,12 @@ namespace Features.BlackJack.Systems
                 if (order.Value-- != 0)
                     continue;
 
+                int totalCards = _cardHolder.Get(owner.Value).Value;
+                owner.Value = newOwner;
+
                 if (shouldHideCard == false)
                     _faceUpTag.Add(card);
-
-                owner.Value = newOwner;
+                order.Value = totalCards;
                 _cardTakenTag.Add(card);
             }
         }

@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c2e6bcbbff7417087c678d743b56eef, type: 3}
   m_Name: DealerViewConfig
   m_EditorClassIdentifier: 
+  _cardViewConfig: {fileID: 11400000, guid: e56d2db71f65f4e4ea7f51b06b6531d6, type: 2}
   _cardDealDuration: 1
   _cardRotateDuration: 0.8
   _cardGetUpDuration: 0.3
-  _cardTakeYOffset: 1
   _cardFaceUpAngle: {x: -270, y: -90, z: -90}
   _cardFaceDownAngle: {x: -90, y: -90, z: -90}
   _cardPathCenter: {x: 0.2, y: 0.3, z: 0}
   _handsPosition: {x: 0, y: 0, z: 0.2}
-  _cardWidth: 0.33
   _firstCardOffsetXFactor: -3
   _cardOffsetXFactor: 1.2

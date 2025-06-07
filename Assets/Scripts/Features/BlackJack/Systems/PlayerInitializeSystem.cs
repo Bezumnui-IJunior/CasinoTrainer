@@ -25,7 +25,7 @@ namespace Features.BlackJack.Systems
             Entity entity = World.CreateEntity();
 
             World.GetStash<PlayerTag>().Add(entity);
-            World.GetStash<CardHolderTag>().Add(entity);
+            World.GetStash<CardHolderComponent>().Add(entity);
             World.GetStash<ScoreComponent>().Add(entity);
             World.GetStash<CollectAnimationComponent>().Add(entity).Value = _playerCollectAnimation;
         }
