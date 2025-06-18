@@ -17,7 +17,20 @@ namespace Progress
         public void Save() =>
             _serializer.Save(this);
 
-        protected static bool TryLoad<T>(out T result, string prefsKey) where T : PersistantData =>
-            new PersistantSerializer(prefsKey).TryLoad(out result);
+        protected static bool TryLoad<T>(out T result, string prefsKey) where T : PersistantData
+        {
+            if (new PersistantSerializer(prefsKey).TryLoad<T>(out T resultRaw))
+            {
+                result = (T)resultRaw;
+
+                return true;
+            }
+
+            result = null;
+
+            return false;
+
+        }
+           
     }
 }

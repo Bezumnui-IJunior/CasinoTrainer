@@ -27,8 +27,11 @@ namespace Progress
             PlayerPrefs.Save();
         }
 
-        public bool Load<T>(T destination)
+        public bool Load<T>(object destination)
         {
+            if (destination.GetType() != typeof(T))
+                throw new TypeAccessException("Invalid type for deserialization");
+
             if (TryLoad(out T loaded) == false)
                 return false;
 
