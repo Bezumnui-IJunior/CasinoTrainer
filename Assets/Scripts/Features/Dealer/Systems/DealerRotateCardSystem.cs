@@ -45,7 +45,6 @@ namespace Features.Dealer.Systems
             {
                 if (_owner.Get(card).Value.Id == dealer.Id)
                     _rotate.Add(card);
-                
             }
         }
 

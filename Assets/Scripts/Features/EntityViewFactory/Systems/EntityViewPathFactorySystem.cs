@@ -3,7 +3,6 @@ using Infrastructure.Providers;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Features.EntityViewFactory.Systems
 {
@@ -36,7 +35,6 @@ namespace Features.EntityViewFactory.Systems
                 EntityProvider gameObject = Object.Instantiate(Resources.Load<EntityProvider>(path.Value));
                 gameObject.SetEntity(entity);
                 gameObject.transform.position = SpawnPosition;
-                
             }
         }
 

@@ -28,7 +28,7 @@ namespace Features.BlackJack.Systems
             _cardHolderFilter = World.Filter
                 .With<CardHolderComponent>()
                 .Build();
-            
+
             _cardHolder = World.GetStash<CardHolderComponent>();
         }
 

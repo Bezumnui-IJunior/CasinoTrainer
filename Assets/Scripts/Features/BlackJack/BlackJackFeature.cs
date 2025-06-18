@@ -3,15 +3,12 @@ using Features.BlackJack.Configs;
 using Features.BlackJack.Services;
 using Features.BlackJack.Systems;
 using Features.Card.Services;
-using Features.Common.Systems;
 using Features.Dealer.Services;
-using Features.GameOver.Systems;
 using Infrastructure;
 using Progress;
 using Scellecs.Morpeh.Addons.Feature;
 using Unity.IL2CPP.CompilerServices;
 using VContainer;
-using View.Services;
 
 namespace Features.BlackJack
 {
@@ -21,11 +18,11 @@ namespace Features.BlackJack
     public class BlackJackFeature : CombinedFeature
     {
         private readonly IDeckFactory _deckFactory;
+        private readonly IPlayerData _playerData;
+        private readonly IPlayerFactory _playerFactory;
         private readonly IScoreCalculator _scoresCalculator;
         private readonly IStateMachine _stateMachine;
         private readonly IWindowsManager _windowsManager;
-        private readonly IPlayerFactory _playerFactory;
-        private readonly IPlayerData _playerData;
 
         [Inject]
         public BlackJackFeature(IDeckFactory deckFactory, IScoreCalculator scoresCalculator, IDealerFactory dealerFactory, IDealerConfig dealerConfig,
@@ -43,7 +40,7 @@ namespace Features.BlackJack
         {
             AddInitializer(new DeckInitializeSystem(_deckFactory));
             AddInitializer(new PlayerInitializeSystem(_playerFactory));
-            
+
             AddSystem(new StartDealerTurnSystem());
             AddSystem(new DelegateTurnToDealerSystem());
             AddSystem(new RemoveTurnHolderSystem());

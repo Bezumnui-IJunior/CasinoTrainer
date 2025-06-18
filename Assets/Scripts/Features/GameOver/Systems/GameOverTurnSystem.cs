@@ -12,8 +12,8 @@ namespace Features.GameOver.Systems
     public class GameOverTurnSystem : ISystem
     {
         private readonly IWindowsManager _windowsManager;
-        private Stash<TurnHolderComponent> _turnHolder;
         private Stash<GameOverTag> _gameOverTag;
+        private Stash<TurnHolderComponent> _turnHolder;
 
         public World World { get; set; }
 

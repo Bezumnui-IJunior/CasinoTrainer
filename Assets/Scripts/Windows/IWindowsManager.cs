@@ -4,11 +4,11 @@ namespace Windows
 {
     public interface IWindowsManager
     {
+        RectTransform RootUi { get; }
         void Open(WindowsId id);
         void Close(WindowsId id);
         void CloseAll();
         void SetRootUI(RectTransform newRoot);
-        RectTransform RootUi { get; }
         void OpenOrLeaveOnly(params WindowsId[] ids);
     }
 }

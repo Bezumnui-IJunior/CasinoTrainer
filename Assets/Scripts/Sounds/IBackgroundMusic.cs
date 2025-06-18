@@ -4,7 +4,7 @@ namespace Sounds
 {
     public interface IBackgroundMusic
     {
-        void SetAudioSource(AudioSource source);
         AudioSource AudioSource { get; }
+        void SetAudioSource(AudioSource source);
     }
 }

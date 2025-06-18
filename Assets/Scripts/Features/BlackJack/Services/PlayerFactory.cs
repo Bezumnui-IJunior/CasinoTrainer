@@ -11,12 +11,12 @@ namespace Features.BlackJack.Services
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class PlayerFactory : IPlayerFactory
     {
-        private readonly World _world;
+        private readonly Stash<CardHolderComponent> _cardHolder;
+        private readonly Stash<CollectAnimationComponent> _collectAnimation;
         private readonly IPlayerCollectAnimation _playerCollectAnimation;
         private readonly Stash<PlayerTag> _playerTag;
-        private readonly Stash<CardHolderComponent> _cardHolder;
         private readonly Stash<ScoreComponent> _score;
-        private readonly Stash<CollectAnimationComponent> _collectAnimation;
+        private readonly World _world;
 
         public PlayerFactory(World world, IPlayerCollectAnimation playerCollectAnimation)
         {
@@ -36,7 +36,6 @@ namespace Features.BlackJack.Services
             _cardHolder.Add(entity);
             _score.Add(entity);
             _collectAnimation.Add(entity).Value = _playerCollectAnimation;
-            _world.GetStash<BetComponent>().Add(entity).Value = 10;
 
             return entity;
         }

@@ -11,9 +11,9 @@ namespace Features.Dealer.Systems
     public class DealerRotatingDeciderSystem : ISystem
     {
         private Filter _dealerFilter;
+        private Stash<DecidedTag> _decided;
         private Stash<HiddenCardsComponent> _hiddenCards;
         private Stash<RotatingRequestTag> _rotatingRequest;
-        private Stash<DecidedTag> _decided;
 
         public World World { get; set; }
 
@@ -32,7 +32,6 @@ namespace Features.Dealer.Systems
             _hiddenCards = World.GetStash<HiddenCardsComponent>();
             _rotatingRequest = World.GetStash<RotatingRequestTag>();
             _decided = World.GetStash<DecidedTag>();
-
         }
 
         public void OnUpdate(float deltaTime)

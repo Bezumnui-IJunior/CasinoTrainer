@@ -1,6 +1,4 @@
 using Features.BlackJack.Components;
-using Features.Dealer.Components;
-using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using View.Services;
@@ -13,8 +11,8 @@ namespace Features.BlackJack.Services
     public class GameOverFactory : IGameOverFactory
     {
         private readonly IDealerCollectAnimation _animation;
-        private readonly Stash<GameOverTag> _gameOverTag; 
-        private readonly Stash<WinnerComponent> _winner; 
+        private readonly Stash<GameOverTag> _gameOverTag;
+        private readonly Stash<WinnerComponent> _winner;
         private readonly World _world;
 
         public GameOverFactory(World world)
@@ -36,6 +34,7 @@ namespace Features.BlackJack.Services
         {
             Entity entity = _world.CreateEntity();
             _gameOverTag.Add(entity);
+
             return entity;
         }
     }

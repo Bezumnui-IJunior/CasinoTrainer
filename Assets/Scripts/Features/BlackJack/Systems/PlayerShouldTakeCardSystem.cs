@@ -11,9 +11,9 @@ namespace Features.BlackJack.Systems
     {
         private const int GameMaxScore = 21;
         private Filter _playerFilter;
+        private Stash<ScoreComponent> _score;
         private Stash<TakeCardRequestTag> _shouldTakeCard;
         private Filter _tagFilter;
-        private Stash<ScoreComponent> _score;
 
         public World World { get; set; }
 

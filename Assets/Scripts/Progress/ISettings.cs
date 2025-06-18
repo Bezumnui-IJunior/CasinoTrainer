@@ -4,5 +4,6 @@ namespace Progress
     {
         float MusicVolume { get; set; }
         int TargetFrameRate { get; set; }
+        int DefaultBet { get; set; }
     }
 }

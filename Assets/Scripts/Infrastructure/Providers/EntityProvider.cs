@@ -11,20 +11,20 @@ namespace Infrastructure.Providers
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class EntityProvider : MonoBehaviour, IEntityProvider
     {
-        [ShowInInspector] private Entity _entity;
         private bool _isInit;
-        public Entity Entity => _entity;
+        [field: ShowInInspector] public Entity Entity { get; private set; }
+
         public void SetEntity(Entity entity)
         {
             if (_isInit)
                 return;
 
             _isInit = true;
-            _entity = entity;
-            _entity.GetWorld().GetStash<ViewComponent>().Add(_entity).Value = this;
+            Entity = entity;
+            Entity.GetWorld().GetStash<ViewComponent>().Add(Entity).Value = this;
 
             foreach (IComponentsProvider provider in GetComponentsInChildren<IComponentsProvider>())
-                provider.Initialize(_entity, _entity.GetWorld());
+                provider.Initialize(Entity, Entity.GetWorld());
         }
 
         [ContextMenu("Destroy")]
@@ -32,8 +32,8 @@ namespace Infrastructure.Providers
         {
             foreach (IComponentsProvider provider in GetComponentsInChildren<IComponentsProvider>())
                 provider.Deinitialize();
-            
-            _entity.GetWorld().RemoveEntity(_entity);
+
+            Entity.GetWorld().RemoveEntity(Entity);
             Destroy(gameObject);
         }
     }

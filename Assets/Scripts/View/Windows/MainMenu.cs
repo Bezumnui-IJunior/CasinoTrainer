@@ -1,4 +1,3 @@
-using System;
 using Windows;
 using GameStates;
 using Infrastructure;
@@ -19,13 +18,6 @@ namespace View.Windows
         private IStateMachine _stateMachine;
         private IWindowsManager _windowsManager;
 
-        [Inject]
-        protected void Constructor(IStateMachine stateMachine, IWindowsManager windowsManager)
-        {
-            _stateMachine = stateMachine;
-            _windowsManager = windowsManager;
-        }
-
         private void Awake()
         {
             this.DoSelfInjection();
@@ -41,6 +33,13 @@ namespace View.Windows
         {
             _playButton.onClick.RemoveListener(OnPlayClicked);
             _settingsButton.onClick.RemoveListener(OnSettingsClicked);
+        }
+
+        [Inject]
+        protected void Constructor(IStateMachine stateMachine, IWindowsManager windowsManager)
+        {
+            _stateMachine = stateMachine;
+            _windowsManager = windowsManager;
         }
 
         private void OnPlayClicked()

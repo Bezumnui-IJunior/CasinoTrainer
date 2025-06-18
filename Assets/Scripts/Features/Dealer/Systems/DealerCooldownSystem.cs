@@ -6,9 +6,9 @@ namespace Features.Dealer.Systems
 {
     public class DealerCooldownSystem : ISystem
     {
-        
-        private Stash<TakeCardCooldownComponent> _takeCardTimer;
         private Filter _filter;
+
+        private Stash<TakeCardCooldownComponent> _takeCardTimer;
 
         public World World { get; set; }
 
@@ -18,7 +18,7 @@ namespace Features.Dealer.Systems
                 .With<DealerTag>()
                 .With<TakeCardCooldownComponent>()
                 .Build();
-            
+
             _takeCardTimer = World.GetStash<TakeCardCooldownComponent>();
         }
 
@@ -29,7 +29,7 @@ namespace Features.Dealer.Systems
                 ref TakeCardCooldownComponent cooldown = ref _takeCardTimer.Get(entity);
 
                 cooldown.Value -= deltaTime;
-                    
+
                 if (cooldown.Value - deltaTime > 0)
                     continue;
 

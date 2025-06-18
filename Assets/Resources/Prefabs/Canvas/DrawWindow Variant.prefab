@@ -12,6 +12,22 @@ PrefabInstance:
       propertyPath: m_text
       value: DRAW
       objectReference: {fileID: 0}
+    - target: {fileID: 2188590216196381447, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.23921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188590216196381447, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.5529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188590216196381447, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.68235296
+      objectReference: {fileID: 0}
+    - target: {fileID: 2188590216196381447, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4282224046
+      objectReference: {fileID: 0}
     - target: {fileID: 2744537008440177659, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -92,9 +108,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7040035294073548414, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.23921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 7040035294073548414, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.5529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 7040035294073548414, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.68235296
+      objectReference: {fileID: 0}
+    - target: {fileID: 7040035294073548414, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4282224046
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463312866815010175, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.23921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463312866815010175, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.5529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463312866815010175, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.68235296
+      objectReference: {fileID: 0}
+    - target: {fileID: 7463312866815010175, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4282224046
+      objectReference: {fileID: 0}
     - target: {fileID: 9053543151498509135, guid: eef5ce2be7b8c4abe92e5f513d01df5c, type: 3}
       propertyPath: m_Name
-      value: GameOverWindow Variant
+      value: DrawWindow Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

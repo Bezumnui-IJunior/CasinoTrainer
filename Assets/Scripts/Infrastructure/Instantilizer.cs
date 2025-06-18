@@ -1,11 +1,10 @@
+using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 namespace Infrastructure
 {
-    using Unity.IL2CPP.CompilerServices;
-
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
@@ -21,7 +20,7 @@ namespace Infrastructure
 
         public T Instantiate<T>(T prefab) where T : Component =>
             _resolver.Instantiate(prefab, null);
-        
+
         public T Instantiate<T>(T prefab, Transform parent, bool worldPositionStays = false) where T : Component =>
             _resolver.Instantiate(prefab, parent, worldPositionStays);
     }

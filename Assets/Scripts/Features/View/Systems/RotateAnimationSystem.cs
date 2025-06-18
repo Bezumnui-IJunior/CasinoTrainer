@@ -5,7 +5,6 @@ using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using View;
-using View.Services;
 
 namespace Features.View.Systems
 {
@@ -15,12 +14,12 @@ namespace Features.View.Systems
     public class RotateAnimationSystem : ISystem
     {
         private readonly ICardViewConfig _config;
+        private Stash<CardRotateComponent> _animation;
 
         private Stash<FaceUpTag> _faceUpStash;
 
         private Filter _filter;
         private Stash<ViewComponent> _view;
-        private Stash<CardRotateComponent> _animation;
 
         public RotateAnimationSystem(ICardViewConfig config)
         {

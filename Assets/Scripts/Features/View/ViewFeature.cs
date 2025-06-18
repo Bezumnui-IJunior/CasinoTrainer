@@ -13,8 +13,8 @@ namespace Features.View
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class ViewFeature : UpdateFeature
     {
-        private readonly IScoreCalculator _scoreCalculator;
         private readonly ICardViewConfig _cardViewConfig;
+        private readonly IScoreCalculator _scoreCalculator;
 
         [Inject]
         public ViewFeature(IScoreCalculator scoreCalculator, ICardViewConfig cardViewConfig)
@@ -27,14 +27,13 @@ namespace Features.View
         {
             AddInitializer(new CardsViewInitSystem());
             AddInitializer(new RotateAnimationInitSystem());
-            
+
             AddSystem(new CardsViewSystem());
             AddSystem(new RotateAnimationSetupSystem());
             AddSystem(new CardSetAppearSystem());
             AddSystem(new CardCollectAnimationSystem(_scoreCalculator));
-            
-            AddSystem(new RotateAnimationSystem( _cardViewConfig));
 
+            AddSystem(new RotateAnimationSystem(_cardViewConfig));
         }
     }
 }

@@ -10,7 +10,6 @@ namespace Features.Dealer.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DealerIntroPlayedSystem : ISystem
     {
-
         private Filter _dealerFilter;
         private Stash<HiddenCardsComponent> _hiddenCards;
         private Stash<PlayedIntroTag> _playedIntroTag;

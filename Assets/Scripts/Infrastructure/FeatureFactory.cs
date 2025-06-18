@@ -15,8 +15,8 @@ namespace Infrastructure
 
         public T Create<T>() =>
             _resolver.Resolve<T>();
-        
+
         public BaseFeature Create(Type type) =>
-            (BaseFeature) _resolver.Resolve(type);
+            (BaseFeature)_resolver.Resolve(type);
     }
 }

@@ -13,15 +13,14 @@ namespace Features.View.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class RotateAnimationSetupSystem : ISystem
     {
-        private Filter _filter;
-        private Stash<ViewComponent> _view;
         private Stash<CardRotateComponent> _cardRotate;
+        private Filter _filter;
         private Stash<ViewInitTag> _initTag;
+        private Stash<ViewComponent> _view;
         public World World { get; set; }
 
         public void OnAwake()
         {
-            
             _filter = World.Filter
                 .With<ViewComponent>()
                 .With<CardRotateComponent>()

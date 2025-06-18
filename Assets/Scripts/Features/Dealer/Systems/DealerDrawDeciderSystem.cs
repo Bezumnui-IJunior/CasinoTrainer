@@ -12,22 +12,22 @@ namespace Features.Dealer.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DealerDrawDeciderSystem : ISystem
     {
-        private readonly IGameOverFactory _gameOverFactory;
         private const int MaxDealerScore = 17;
         private const int MaxGameScore = 21;
+        private readonly IGameOverFactory _gameOverFactory;
 
         private Filter _dealerFilter;
-        private Stash<ScoreComponent> _score;
         private Stash<DecidedTag> _decided;
         private Filter _playerFilter;
-
-        public World World { get; set; }
+        private Stash<ScoreComponent> _score;
 
         [Inject]
         public DealerDrawDeciderSystem(IGameOverFactory gameOverFactory)
         {
             _gameOverFactory = gameOverFactory;
         }
+
+        public World World { get; set; }
 
         public void OnAwake()
         {

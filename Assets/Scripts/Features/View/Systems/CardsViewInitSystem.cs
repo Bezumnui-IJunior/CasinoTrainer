@@ -2,7 +2,6 @@ using Features.EntityViewFactory.Components;
 using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
-using View.Services;
 
 namespace Features.View.Systems
 {

@@ -1,7 +1,5 @@
 using System;
-using GameStates;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Infrastructure

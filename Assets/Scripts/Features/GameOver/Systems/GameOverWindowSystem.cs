@@ -15,10 +15,10 @@ namespace Features.GameOver.Systems
     {
         private readonly IWindowsManager _windowsManager;
         private Filter _dealerFilter;
+        private Stash<DrownTag> _drownTag;
         private Filter _filter;
         private Filter _playerFilter;
         private Stash<WinnerComponent> _winner;
-        private Stash<DrownTag> _drownTag;
 
         [Inject]
         public GameOverWindowSystem(IWindowsManager windowsManager)
@@ -63,10 +63,7 @@ namespace Features.GameOver.Systems
         private void OpenIfWinner(WinnerComponent winner, Entity entity, WindowsId id)
         {
             if (winner.Value == entity.Id)
-            {
-                _windowsManager.Close(WindowsId.BlackJackPlayButtons);
-                _windowsManager.Open(id);
-            }
+                _windowsManager.OpenOrLeaveOnly(id, WindowsId.MoneyWindow);
         }
     }
 }

@@ -6,7 +6,5 @@ namespace Features.View.Components
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public struct ViewInitTag : IComponent
-    {
-    }
+    public struct ViewInitTag : IComponent { }
 }

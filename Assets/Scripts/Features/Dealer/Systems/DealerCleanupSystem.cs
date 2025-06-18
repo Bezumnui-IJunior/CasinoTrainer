@@ -10,13 +10,13 @@ namespace Features.Dealer.Systems
     public class DealerCleanupSystem : ICleanupSystem
     {
         private Stash<DealerTakeCardRequestTag> _dealerTakingCard;
-        private Filter _takingFilter;
-        private Filter _rotatingFilter;
-        private Stash<RotatingRequestTag> _rotatingTag;
-        private Filter _delegateTurnFilter;
-        private Stash<DelegateTurnRequest> _delegateTurn;
         private Stash<DecidedTag> _decided;
         private Filter _decidedTurnFilter;
+        private Stash<DelegateTurnRequest> _delegateTurn;
+        private Filter _delegateTurnFilter;
+        private Filter _rotatingFilter;
+        private Stash<RotatingRequestTag> _rotatingTag;
+        private Filter _takingFilter;
 
         public World World { get; set; }
 
@@ -24,24 +24,23 @@ namespace Features.Dealer.Systems
         {
             _takingFilter = World.Filter
                 .With<DealerTakeCardRequestTag>()
-                .Build();  
-            
+                .Build();
+
             _rotatingFilter = World.Filter
                 .With<RotatingRequestTag>()
-                .Build();   
-            
+                .Build();
+
             _delegateTurnFilter = World.Filter
                 .With<DelegateTurnRequest>()
                 .Build();
-            
+
             _decidedTurnFilter = World.Filter
                 .With<DecidedTag>()
                 .Build();
-            
-            
+
             _dealerTakingCard = World.GetStash<DealerTakeCardRequestTag>();
             _rotatingTag = World.GetStash<RotatingRequestTag>();
-            _delegateTurn =  World.GetStash<DelegateTurnRequest>();  
+            _delegateTurn = World.GetStash<DelegateTurnRequest>();
             _decided = World.GetStash<DecidedTag>();
         }
 

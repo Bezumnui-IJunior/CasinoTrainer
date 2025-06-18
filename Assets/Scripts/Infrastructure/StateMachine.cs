@@ -11,15 +11,15 @@ namespace Infrastructure
     public class StateMachine : IStateMachine, IStateChanger
     {
         private readonly IObjectResolver _resolver;
-        private Dictionary<Type, IState> _states;
         private IState _currentState;
+        private Dictionary<Type, IState> _states;
 
         public StateMachine(IObjectResolver resolver)
         {
             _resolver = resolver;
         }
-        
-        public void ChangeState<T>() where T: IState
+
+        public void ChangeState<T>() where T : IState
         {
             _currentState?.Exit();
             _currentState = _resolver.Resolve<T>();

@@ -12,10 +12,10 @@ namespace Features.BlackJack.Systems
     public class CalculateScoreSystem : ISystem
     {
         private readonly IScoreCalculator _scoreCalculator;
-        private Stash<OwnerComponent> _owner;
-        private Stash<ScoreComponent> _score;
         private Filter _cardFilter;
         private Filter _cardHolderFilter;
+        private Stash<OwnerComponent> _owner;
+        private Stash<ScoreComponent> _score;
 
         public CalculateScoreSystem(IScoreCalculator scoreCalculator)
         {

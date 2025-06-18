@@ -10,9 +10,9 @@ namespace Features.BlackJack.Systems
     public class PlayerScoreDelegateSystem : ISystem
     {
         private const int GameMaxScore = 21;
+        private Stash<DelegateTurnToDealerRequestTag> _delegateTag;
         private Filter _playerFilter;
         private Stash<ScoreComponent> _score;
-        private Stash<DelegateTurnToDealerRequestTag> _delegateTag;
 
         public World World { get; set; }
 

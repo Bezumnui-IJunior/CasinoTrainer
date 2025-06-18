@@ -4,8 +4,8 @@ namespace Infrastructure
 {
     public class GlobalInjector
     {
-        private IObjectResolver _resolver;
         private static GlobalInjector _globalInjector;
+        private IObjectResolver _resolver;
 
         // private GlobalInjector() { }
 

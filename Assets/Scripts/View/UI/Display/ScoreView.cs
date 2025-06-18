@@ -41,7 +41,7 @@ namespace View.UI.Display
                 .With<ScoreComponent>()
                 .Build();
         }
-        
+
         private void UpdateScore()
         {
             _text.text = $"{_prefix} {_lastScore}";

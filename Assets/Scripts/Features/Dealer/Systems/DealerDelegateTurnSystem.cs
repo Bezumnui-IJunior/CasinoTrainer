@@ -13,8 +13,8 @@ namespace Features.Dealer.Systems
     {
         private Filter _dealerFilter;
         private Filter _playerFilter;
-        private Filter _turnHolderFilter;
         private Stash<TurnHolderComponent> _turnHolder;
+        private Filter _turnHolderFilter;
 
         public World World { get; set; }
 
@@ -31,7 +31,7 @@ namespace Features.Dealer.Systems
             _playerFilter = World.Filter
                 .With<PlayerTag>()
                 .Build();
-            
+
             _turnHolderFilter = World.Filter
                 .With<TurnHolderComponent>()
                 .Build();
@@ -45,7 +45,6 @@ namespace Features.Dealer.Systems
             foreach (Entity turnHolder in _turnHolderFilter)
             foreach (Entity player in _playerFilter)
                 _turnHolder.Get(turnHolder).Value = player.Id;
-           
         }
 
         public void Dispose() { }

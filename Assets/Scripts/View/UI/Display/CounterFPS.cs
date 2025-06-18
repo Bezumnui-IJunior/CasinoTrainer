@@ -10,9 +10,9 @@ namespace View.UI.Display
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class CounterFPS : MonoBehaviour
     {
+        private const int Delay = 180;
         [SerializeField] private TextMeshProUGUI _textMeshPro;
         private readonly List<float> _delays = new List<float>();
-        private const int Delay = 180;
 
         private void Update()
         {
@@ -21,7 +21,7 @@ namespace View.UI.Display
             if (_delays.Count < Delay)
                 return;
 
-            _textMeshPro.text = $"{(int) GetFramerate()}";
+            _textMeshPro.text = $"{(int)GetFramerate()}";
             _delays.RemoveAt(0);
         }
 

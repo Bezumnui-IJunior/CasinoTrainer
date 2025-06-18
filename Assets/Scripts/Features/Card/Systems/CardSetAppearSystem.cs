@@ -8,12 +8,12 @@ namespace Features.Card.Systems
 {
     public class CardSetAppearSystem : ISystem
     {
+        private Stash<CardsViewComponent> _cardsView;
         private Stash<DenominalComponent> _denominal;
         private Stash<FaceMeshRendererComponent> _faceRenderer;
         private Filter _filter;
         private Stash<SetAppearTag> _setAppearTag;
         private Stash<SuitComponent> _suit;
-        private Stash<CardsViewComponent> _cardsView;
 
         public World World { get; set; }
 

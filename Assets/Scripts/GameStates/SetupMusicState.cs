@@ -1,7 +1,6 @@
 using Infrastructure;
 using Progress;
 using Sounds;
-using Sounds.Configs;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using VContainer;

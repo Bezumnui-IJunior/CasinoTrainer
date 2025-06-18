@@ -9,10 +9,10 @@ namespace Features.Common
         protected override void Initialize()
         {
             AddInitializer(new TurnHolderInitializeSystem());
-            
+
             AddSystem(new AddTurnHolderSystem());
             AddSystem(new ChangePositionSystem());
-            
+
             AddSystem(new DisposeViewSystem());
             AddSystem(new DisposeSystem());
         }

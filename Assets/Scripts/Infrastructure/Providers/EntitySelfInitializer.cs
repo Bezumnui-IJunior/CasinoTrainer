@@ -15,7 +15,7 @@ namespace Infrastructure.Providers
 
             if (provider == null)
                 throw new MissingComponentException($"{nameof(EntityProvider)} was not found on the object");
-            
+
             Entity entity = World.Default.CreateEntity();
             provider.SetEntity(entity);
         }

@@ -1,4 +1,3 @@
-using System;
 using Progress;
 using Sounds;
 using Unity.IL2CPP.CompilerServices;

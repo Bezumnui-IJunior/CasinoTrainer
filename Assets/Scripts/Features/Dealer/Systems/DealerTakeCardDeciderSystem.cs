@@ -14,8 +14,8 @@ namespace Features.Dealer.Systems
 
         private Filter _dealerFilter;
         private Stash<DealerTakeCardRequestTag> _dealerTakeCardRequest;
-        private Stash<ScoreComponent> _score;
         private Stash<DecidedTag> _decided;
+        private Stash<ScoreComponent> _score;
 
         public World World { get; set; }
 
@@ -33,7 +33,6 @@ namespace Features.Dealer.Systems
             _dealerTakeCardRequest = World.GetStash<DealerTakeCardRequestTag>();
             _score = World.GetStash<ScoreComponent>();
             _decided = World.GetStash<DecidedTag>();
-
         }
 
         public void OnUpdate(float deltaTime)

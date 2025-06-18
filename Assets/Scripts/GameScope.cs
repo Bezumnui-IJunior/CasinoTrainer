@@ -10,6 +10,7 @@ using Features.Dealer;
 using Features.Dealer.Services;
 using Features.EntityViewFactory;
 using Features.GameOver;
+using Features.Player;
 using Features.View;
 using GameStates;
 using Infrastructure;
@@ -94,6 +95,7 @@ public class GameScope : LifetimeScope
         builder.Register<CommonFeatures>(Lifetime.Singleton);
         builder.Register<ViewFeature>(Lifetime.Singleton);
         builder.Register<GameOverFeature>(Lifetime.Singleton);
+        builder.Register<PlayerFeature>(Lifetime.Singleton);
     }
 
     private void RegisterFactories(IContainerBuilder builder)

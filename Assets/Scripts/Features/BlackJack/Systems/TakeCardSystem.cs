@@ -11,6 +11,7 @@ namespace Features.BlackJack.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class TakeCardSystem : ISystem
     {
+        private Stash<CardHolderComponent> _cardHolder;
         private Filter _cardHolderFilter;
         private Filter _cardsFilter;
         private Stash<TakenTag> _cardTakenTag;
@@ -19,7 +20,6 @@ namespace Features.BlackJack.Systems
         private Stash<OrderComponent> _order;
         private Stash<OwnerComponent> _owner;
         private Stash<TakeCardRequestTag> _shouldTakeCardTag;
-        private Stash<CardHolderComponent> _cardHolder;
 
         public World World { get; set; }
 
@@ -50,7 +50,6 @@ namespace Features.BlackJack.Systems
             _cardTakenTag = World.GetStash<TakenTag>();
             _faceUpTag = World.GetStash<FaceUpTag>();
             _cardHolder = World.GetStash<CardHolderComponent>();
-
         }
 
         public void OnUpdate(float deltaTime)

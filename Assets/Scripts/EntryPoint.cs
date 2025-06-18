@@ -8,9 +8,9 @@ using VContainer.Unity;
 
 public class EntryPoint : IStartable
 {
-    private readonly IStateMachine _stateMachine;
     private readonly IObjectResolver _resolver;
     private readonly ISettings _settings;
+    private readonly IStateMachine _stateMachine;
 
     [Inject]
     public EntryPoint(IStateMachine stateMachine, IObjectResolver resolver, ISettings settings)

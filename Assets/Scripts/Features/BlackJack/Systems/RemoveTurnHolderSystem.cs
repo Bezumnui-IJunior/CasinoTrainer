@@ -42,7 +42,6 @@ namespace Features.BlackJack.Systems
         }
 
         public void Dispose() { }
-
     }
 
     [Il2CppSetOption(Option.NullChecks, false)]
@@ -87,7 +86,5 @@ namespace Features.BlackJack.Systems
         }
 
         public void Dispose() { }
-
-      
     }
 }

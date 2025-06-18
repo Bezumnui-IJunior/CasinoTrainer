@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Windows
@@ -15,14 +14,14 @@ namespace Windows
             Initialize();
         }
 
-        private void OnDestroy()
-        {
-            Deinitialize();
-        }
-
         private void Update()
         {
             OnUpdate();
+        }
+
+        private void OnDestroy()
+        {
+            Deinitialize();
         }
 
         protected virtual void OnAwake() { }

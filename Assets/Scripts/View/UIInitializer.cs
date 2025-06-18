@@ -1,4 +1,3 @@
-using System;
 using Windows;
 using Infrastructure;
 using UnityEngine;

@@ -10,8 +10,8 @@ namespace Features.BlackJack.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class PlayerInitializeSystem : IInitializer
     {
-        private readonly IPlayerFactory _playerFactory;
         private readonly IPlayerCollectAnimation _playerCollectAnimation;
+        private readonly IPlayerFactory _playerFactory;
 
         public PlayerInitializeSystem(IPlayerFactory playerFactory)
         {

@@ -10,5 +10,6 @@ namespace Windows
         DrawWindow,
         SettingsWindow,
         MoneyWindow,
+        PlaceBetWindow,
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using Features.BlackJack.Components;
+﻿using Features.BlackJack.Components;
 using Features.View.Components;
 using Scellecs.Morpeh;
 
@@ -7,12 +6,12 @@ namespace Features.BlackJack.Systems
 {
     public class CardTakenCleanup : ICleanupSystem
     {
-        private Filter _takenFilter;
-        private Stash<TakeCardRequestTag> _shouldTakeCard;
         private Stash<TakenTag> _cardTakenTag;
-        private Filter _shouldTakeFilter;
-        private Stash<PlayerConsumeRequestTag> _playerConsumerTag;
         private Filter _playerConsumerFilter;
+        private Stash<PlayerConsumeRequestTag> _playerConsumerTag;
+        private Stash<TakeCardRequestTag> _shouldTakeCard;
+        private Filter _shouldTakeFilter;
+        private Filter _takenFilter;
         public World World { get; set; }
 
         public void OnAwake()

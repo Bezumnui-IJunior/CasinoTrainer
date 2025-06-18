@@ -1,7 +1,5 @@
 ﻿using Features.BlackJack.Components;
 using Features.BlackJack.Configs;
-using Features.BlackJack.Services;
-using Features.Common.Components;
 using Features.Dealer.Components;
 using Features.Dealer.Services;
 using Scellecs.Morpeh;
@@ -34,7 +32,7 @@ namespace Features.Dealer.Systems
             World.GetStash<TakeCardCooldownComponent>().Add(dealer).Value = _dealerConfig.FirstCardTimeout;
             World.GetStash<TurnHolderTag>().Add(dealer);
         }
-        
+
         public void Dispose() { }
     }
 }

@@ -4,29 +4,30 @@ using Features.GameOver.Components;
 using Progress;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 
 namespace Features.GameOver.Systems
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public class GameOverMoneySystem : ISystem
+    public class WinMoneySystem : ISystem
     {
+        private const int WinMultiplier = 2;
         private readonly IPlayerData _playerData;
         private readonly IWindowsManager _windowsManager;
+        private Stash<BetComponent> _bet;
         private Filter _dealerFilter;
         private Filter _filter;
         private Filter _playerFilter;
-        private Stash<WinnerComponent> _winner;
-        private Stash<BetComponent> _bet;
         private Stash<PaidTag> _tag;
-        public World World { get; set; }
+        private Stash<WinnerComponent> _winner;
 
-        public GameOverMoneySystem(IPlayerData playerData)
+        public WinMoneySystem(IPlayerData playerData)
         {
             _playerData = playerData;
         }
+
+        public World World { get; set; }
 
         public void OnAwake()
         {
@@ -54,14 +55,8 @@ namespace Features.GameOver.Systems
                 _tag.Add(winnerEntity);
                 ref int bet = ref _bet.Get(player).Value;
 
-                Debug.Log($"Initial score: {_playerData.PlayerMoney}");
-
                 if (_winner.Get(winnerEntity).Value == player.Id)
-                    _playerData.PlayerMoney += bet;
-                else
-                    _playerData.PlayerMoney -= bet;
-
-                Debug.Log($"Current score: {_playerData.PlayerMoney}");
+                    _playerData.AddMoney(bet * WinMultiplier);
 
                 _playerData.Save();
             }

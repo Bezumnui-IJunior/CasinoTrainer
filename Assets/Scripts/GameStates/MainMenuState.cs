@@ -1,7 +1,6 @@
 using Windows;
 using Infrastructure;
 using Unity.IL2CPP.CompilerServices;
-using UnityEditor;
 using VContainer;
 
 namespace GameStates
@@ -12,7 +11,7 @@ namespace GameStates
     public class MainMenuState : State
     {
         private const string MainMenuScenePath = "Assets/Resources/Scenes/MainMenu.unity";
-        
+
         private readonly ISceneFactory _sceneFactory;
         private readonly IWindowsManager _windowsManager;
 
@@ -28,6 +27,5 @@ namespace GameStates
             _windowsManager.CloseAll();
             _sceneFactory.LoadScene(MainMenuScenePath);
         }
-        
     }
 }

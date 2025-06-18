@@ -1,5 +1,4 @@
 ﻿using Features.BlackJack.Components;
-using Features.BlackJack.Services;
 using Features.Dealer.Components;
 using Features.View.Components;
 using Scellecs.Morpeh;
@@ -17,9 +16,9 @@ namespace Features.Dealer.Services
         private readonly Stash<CollectAnimationComponent> _animationComponent;
         private readonly Stash<CardHolderComponent> _cardHolderTag;
         private readonly Stash<DealerTag> _dealerTag;
+        private readonly Stash<HiddenCardsComponent> _hiddenCards;
         private readonly Stash<ScoreComponent> _score;
         private readonly World _world;
-        private readonly Stash<HiddenCardsComponent> _hiddenCards;
 
         public DealerFactory(World world, IDealerCollectAnimation animation)
         {

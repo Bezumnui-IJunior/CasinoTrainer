@@ -10,12 +10,11 @@ namespace Features.Dealer.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DealerDelegateDeciderSystem : ISystem
     {
-
         private Filter _dealerFilter;
+        private Stash<DecidedTag> _decided;
         private Stash<DelegateTurnRequest> _delegateRequest;
         private Stash<HiddenCardsComponent> _hiddenCards;
         private Stash<ScoreComponent> _score;
-        private Stash<DecidedTag> _decided;
 
         public World World { get; set; }
 
@@ -43,7 +42,6 @@ namespace Features.Dealer.Systems
                     _delegateRequest.Add(dealer);
                     _decided.Add(dealer);
                 }
-               
             }
         }
 

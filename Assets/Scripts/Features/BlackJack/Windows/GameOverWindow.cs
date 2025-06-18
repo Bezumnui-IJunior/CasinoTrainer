@@ -3,14 +3,13 @@ using Windows;
 using DG.Tweening;
 using GameStates;
 using Infrastructure;
+using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
 namespace Features.BlackJack.Windows
 {
-    using Unity.IL2CPP.CompilerServices;
-
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
@@ -28,9 +27,9 @@ namespace Features.BlackJack.Windows
         [SerializeField] private Vector2 _outPivot = new Vector2(0.5f, 1);
         [SerializeField] private float _secondsToEase = 0.3f;
         [SerializeField] private float _delaySeconds = 0.8f;
+        private CanvasGroup _canvasGroup;
 
         private RectTransform _rectTransform;
-        private CanvasGroup _canvasGroup;
         private IStateMachine _stateMachine;
 
         [Inject]

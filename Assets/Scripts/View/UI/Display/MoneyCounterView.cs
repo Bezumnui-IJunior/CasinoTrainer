@@ -1,7 +1,5 @@
-using Windows;
-using Features.BlackJack.Components;
+﻿using Infrastructure;
 using Progress;
-using Scellecs.Morpeh;
 using TMPro;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
@@ -12,12 +10,17 @@ namespace View.UI.Display
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public class MoneyView : Window
+    public class MoneyCounterView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _text;
         private IPlayerData _playerData;
 
-        protected override void OnUpdate()
+        private void Awake()
+        {
+            this.DoSelfInjection();
+        }
+
+        private void Update()
         {
             UpdateScore();
         }

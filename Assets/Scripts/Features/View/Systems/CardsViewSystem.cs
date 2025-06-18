@@ -13,10 +13,10 @@ namespace Features.View.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class CardsViewSystem : ISystem
     {
-        private Filter _filter;
-        private Stash<ViewComponent> _view;
         private Stash<CardsViewComponent> _cardsView;
+        private Filter _filter;
         private Stash<ViewInitTag> _initTag;
+        private Stash<ViewComponent> _view;
         public World World { get; set; }
 
         public void OnAwake()
@@ -30,7 +30,6 @@ namespace Features.View.Systems
             _view = World.GetStash<ViewComponent>();
             _cardsView = World.GetStash<CardsViewComponent>();
             _initTag = World.GetStash<ViewInitTag>();
-            
         }
 
         public void OnUpdate(float deltaTime)

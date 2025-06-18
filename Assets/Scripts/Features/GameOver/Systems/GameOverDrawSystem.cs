@@ -13,8 +13,8 @@ namespace Features.GameOver.Systems
     public class GameOverDrawSystem : ISystem
     {
         private readonly IWindowsManager _windowsManager;
-        private Filter _filter;
         private Stash<DrownTag> _drownTag;
+        private Filter _filter;
         private Stash<WinnerComponent> _winner;
 
         [Inject]
@@ -40,8 +40,7 @@ namespace Features.GameOver.Systems
             foreach (Entity entity in _filter)
             {
                 _drownTag.Add(entity);
-                _windowsManager.Close(WindowsId.BlackJackPlayButtons);
-                _windowsManager.Open(WindowsId.DrawWindow);
+                _windowsManager.OpenOrLeaveOnly(WindowsId.DrawWindow, WindowsId.MoneyWindow);
             }
         }
 

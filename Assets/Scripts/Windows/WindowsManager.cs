@@ -73,7 +73,7 @@ namespace Windows
 
         private void CloseExcept(WindowsId[] ids)
         {
-            foreach (WindowsId openedWindow in _openedWindows.Keys)
+            foreach (WindowsId openedWindow in _openedWindows.Keys.ToList())
             {
                 if (ids.Contains(openedWindow) == false)
                     Close(openedWindow);

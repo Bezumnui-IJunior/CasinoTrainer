@@ -6,6 +6,7 @@ using Features.Common;
 using Features.Dealer;
 using Features.EntityViewFactory;
 using Features.GameOver;
+using Features.Player;
 using Features.View;
 using Infrastructure;
 using Scellecs.Morpeh;
@@ -16,9 +17,9 @@ namespace GameStates
     public sealed class BlackJackFeatures
     {
         private readonly IFeatureFactory _factory;
-        private readonly IIndexer _indexer;
         private readonly List<BaseFeature> _features = new List<BaseFeature>();
         private readonly List<Type> _featuresTypes;
+        private readonly IIndexer _indexer;
         private readonly World _world;
 
         public BlackJackFeatures(World world, IFeatureFactory factory, IIndexer indexer)
@@ -32,6 +33,7 @@ namespace GameStates
                 typeof(CommonFeatures),
                 typeof(EntityViewFactoryFeature),
                 typeof(DealerFeature),
+                typeof(PlayerFeature),
                 typeof(CardFeature),
                 typeof(GameOverFeature),
                 typeof(BlackJackFeature),

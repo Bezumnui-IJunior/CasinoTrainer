@@ -11,9 +11,9 @@ namespace Features.Dealer.Systems
     public class DealerTakeCardSystem : ISystem
     {
         private const int HiddenCard = 1;
-        
-        private Filter _dealerFilter;
         private Stash<CardHolderComponent> _cardHolderTag;
+
+        private Filter _dealerFilter;
         private Stash<TakeCardRequestTag> _takeCardRequest;
 
         public World World { get; set; }

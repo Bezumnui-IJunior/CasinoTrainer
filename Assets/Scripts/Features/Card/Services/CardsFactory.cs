@@ -1,7 +1,6 @@
 ﻿using Features.Card.Components;
 using Features.Common.Components;
 using Features.EntityViewFactory.Components;
-using Infrastructure.Providers;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;

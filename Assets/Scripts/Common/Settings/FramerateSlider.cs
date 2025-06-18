@@ -22,15 +22,15 @@ namespace Common.Settings
                 _slider = GetComponent<Slider>();
         }
 
+        private void Update()
+        {
+            _textMeshPro.text = $"FPS: {_slider.value}";
+        }
+
         private void OnEnable()
         {
             _slider.value = _settings.TargetFrameRate;
             _slider.onValueChanged.AddListener(OnValueChanged);
-        }
-
-        private void Update()
-        {
-            _textMeshPro.text = $"FPS: {_slider.value}";
         }
 
         private void OnDisable()

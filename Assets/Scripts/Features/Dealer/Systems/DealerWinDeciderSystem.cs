@@ -11,13 +11,13 @@ namespace Features.Dealer.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DealerWinDeciderSystem : ISystem
     {
-        private readonly IGameOverFactory _gameOverFactory;
         private const int MaxGameScore = 21;
+        private readonly IGameOverFactory _gameOverFactory;
 
         private Filter _dealerFilter;
-        private Stash<ScoreComponent> _score;
         private Stash<DecidedTag> _decided;
         private Filter _playerFilter;
+        private Stash<ScoreComponent> _score;
 
         public DealerWinDeciderSystem(IGameOverFactory gameOverFactory)
         {
@@ -55,7 +55,7 @@ namespace Features.Dealer.Systems
                 ref int dealerScore = ref _score.Get(dealer).Value;
                 ref int playerScore = ref _score.Get(player).Value;
 
-                if (dealerScore <= MaxGameScore && dealerScore > playerScore || playerScore > MaxGameScore)
+                if ((dealerScore <= MaxGameScore && dealerScore > playerScore) || playerScore > MaxGameScore)
                 {
                     _gameOverFactory.CreateGameOver(dealer);
                     _decided.Add(dealer);

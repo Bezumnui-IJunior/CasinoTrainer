@@ -17,7 +17,6 @@ namespace Features.Common.Systems
             _filter = World.Filter
                 .With<DisposingTag>()
                 .Build();
-
         }
 
         public void OnUpdate(float deltaTime)

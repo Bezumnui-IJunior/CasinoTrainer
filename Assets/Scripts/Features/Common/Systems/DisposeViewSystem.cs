@@ -10,8 +10,8 @@ namespace Features.Common.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DisposeViewSystem : ICleanupSystem
     {
-        private Stash<ViewComponent> _view;
         private Filter _filter;
+        private Stash<ViewComponent> _view;
         public World World { get; set; }
 
         public void OnAwake()

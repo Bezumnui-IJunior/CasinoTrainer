@@ -1,4 +1,3 @@
-using System;
 using Features.BlackJack.Components;
 using Features.Common.Components;
 using Features.Dealer.Components;
@@ -12,9 +11,9 @@ namespace Features.BlackJack.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class StartDealerTurnSystem : ISystem
     {
-        private Filter _playerFilter;
-        private Filter _dealerFilter;
         private Stash<BetConfirmedTag> _betConfirmedTag;
+        private Filter _dealerFilter;
+        private Filter _playerFilter;
         private Stash<TurnHolderComponent> _turnHolder;
         public World World { get; set; }
 

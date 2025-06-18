@@ -3,20 +3,19 @@ using Windows;
 using Features.Common.Components;
 using Infrastructure;
 using Scellecs.Morpeh;
+using Unity.IL2CPP.CompilerServices;
 
 namespace GameStates
 {
-    using Unity.IL2CPP.CompilerServices;
-
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class BlackJackRunningState : State
     {
         private readonly BlackJackFeatures _blackJackFeatures;
+        private readonly Stash<DisposingTag> _disposingTag;
         private readonly IWindowsManager _windowsManager;
         private readonly World _world;
-        private readonly Stash<DisposingTag> _disposingTag;
 
         public BlackJackRunningState(
             IStateMachine stateMachine,
@@ -35,9 +34,13 @@ namespace GameStates
         {
             _blackJackFeatures.AddFeatures();
 
+            // _windowsManager.OpenOrLeaveOnly(
+            //     WindowsId.BlackJackPlayButtons,
+            //     WindowsId.ScoreCounter,
+            //     WindowsId.MoneyWindow
+            // );
             _windowsManager.OpenOrLeaveOnly(
-                WindowsId.BlackJackPlayButtons,
-                WindowsId.ScoreCounter,
+                WindowsId.PlaceBetWindow,
                 WindowsId.MoneyWindow
             );
         }

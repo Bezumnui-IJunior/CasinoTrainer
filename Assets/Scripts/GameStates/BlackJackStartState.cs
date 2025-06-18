@@ -27,6 +27,5 @@ namespace GameStates
         {
             ChangeState<BlackJackRunningState>();
         }
-
     }
 }
