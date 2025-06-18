@@ -3,6 +3,7 @@ using Infrastructure.Providers;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Features.EntityViewFactory.Systems
 {
@@ -11,6 +12,7 @@ namespace Features.EntityViewFactory.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class EntityViewPathFactorySystem : ISystem
     {
+        private static readonly Vector3 SpawnPosition = -new Vector3(9999, 9999, 9999);
         private Filter _filter;
         private Stash<ViewPathComponent> _viewPath;
 
@@ -31,7 +33,10 @@ namespace Features.EntityViewFactory.Systems
             foreach (Entity entity in _filter)
             {
                 ref ViewPathComponent path = ref _viewPath.Get(entity);
-                Object.Instantiate(Resources.Load<EntityProvider>(path.Value)).SetEntity(entity);
+                EntityProvider gameObject = Object.Instantiate(Resources.Load<EntityProvider>(path.Value));
+                gameObject.SetEntity(entity);
+                gameObject.transform.position = SpawnPosition;
+                
             }
         }
 

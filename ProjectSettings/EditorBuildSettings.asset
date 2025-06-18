@@ -4,7 +4,17 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Resources/Scenes/Bootstrap.unity
+    guid: 3ba495ced00d74155a3775acc06964c2
+  - enabled: 1
+    path: Assets/Resources/Scenes/MainMenu.unity
+    guid: be3395433d20540b0a2cddd19f3059e8
+  - enabled: 1
+    path: Assets/Resources/Scenes/BlackJack.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: f7d04e09e24d44b48a12fcd33b189d25, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 289c1b55c9541489481df5cc06664110, type: 3}
   m_UseUCBPForAssetBundles: 0

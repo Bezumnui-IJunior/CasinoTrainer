@@ -1,7 +1,7 @@
 ﻿using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
-namespace Features.BlackJack.Components
+namespace Features.Common.Components
 {
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]

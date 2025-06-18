@@ -1,6 +1,7 @@
 ﻿using Features.BlackJack.Components;
 using Features.Card.Components;
 using Features.EntityViewFactory.Components;
+using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 using View;
@@ -13,17 +14,16 @@ namespace Features.View.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class RotateAnimationSystem : ISystem
     {
-        private readonly ICardRotateAnimation _cardRotateAnimation;
         private readonly ICardViewConfig _config;
 
         private Stash<FaceUpTag> _faceUpStash;
 
         private Filter _filter;
         private Stash<ViewComponent> _view;
+        private Stash<CardRotateComponent> _animation;
 
-        public RotateAnimationSystem(ICardRotateAnimation cardRotateAnimation, ICardViewConfig config)
+        public RotateAnimationSystem(ICardViewConfig config)
         {
-            _cardRotateAnimation = cardRotateAnimation;
             _config = config;
         }
 
@@ -37,13 +37,15 @@ namespace Features.View.Systems
                 .With<FaceUpTag>()
                 .Build();
 
+            _animation = World.GetStash<CardRotateComponent>();
             _view = World.GetStash<ViewComponent>();
         }
 
         public void OnUpdate(float deltaTime)
         {
+            foreach (CardRotateComponent animation in _animation)
             foreach (Entity card in _filter)
-                _cardRotateAnimation.RotateUp(_view.Get(card).Value.transform, _config);
+                animation.Value.RotateUp(_view.Get(card).Value.transform, _config);
         }
 
         public void Dispose() { }

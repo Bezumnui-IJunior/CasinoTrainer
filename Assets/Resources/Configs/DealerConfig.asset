@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a932aef6e140818c0e0f29263fdacf, type: 3}
   m_Name: DealerConfig
   m_EditorClassIdentifier: 
-  _firstCardTimeout: 2
+  _firstCardTimeout: 1
   _takeCardTimeout: 1

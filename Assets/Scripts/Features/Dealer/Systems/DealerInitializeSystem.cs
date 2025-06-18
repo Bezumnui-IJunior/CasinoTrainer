@@ -1,7 +1,9 @@
 ﻿using Features.BlackJack.Components;
 using Features.BlackJack.Configs;
 using Features.BlackJack.Services;
+using Features.Common.Components;
 using Features.Dealer.Components;
+using Features.Dealer.Services;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
@@ -31,12 +33,8 @@ namespace Features.Dealer.Systems
             Entity dealer = _dealerFactory.CreateDealer();
             World.GetStash<TakeCardCooldownComponent>().Add(dealer).Value = _dealerConfig.FirstCardTimeout;
             World.GetStash<TurnHolderTag>().Add(dealer);
-
-            
-            foreach (Entity turnHolder in World.Filter.With<TurnHolderComponent>().Build())
-                World.GetStash<TurnHolderComponent>().Get(turnHolder).Value = dealer.Id;
         }
-
+        
         public void Dispose() { }
     }
 }

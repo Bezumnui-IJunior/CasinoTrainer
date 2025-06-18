@@ -1,10 +1,10 @@
 ﻿using Features.BlackJack.Services;
+using Features.Card.Systems;
 using Features.View.Systems;
 using Scellecs.Morpeh.Addons.Feature;
 using Unity.IL2CPP.CompilerServices;
 using VContainer;
 using View;
-using View.Services;
 
 namespace Features.View
 {
@@ -14,24 +14,27 @@ namespace Features.View
     public class ViewFeature : UpdateFeature
     {
         private readonly IScoreCalculator _scoreCalculator;
-        private readonly IScoreView _scoreView;
-        private readonly ICardRotateAnimation _cardRotateAnimation;
         private readonly ICardViewConfig _cardViewConfig;
 
         [Inject]
-        public ViewFeature(IScoreView scoreView, IScoreCalculator scoreCalculator, ICardRotateAnimation cardRotateAnimation, ICardViewConfig cardViewConfig)
+        public ViewFeature(IScoreCalculator scoreCalculator, ICardViewConfig cardViewConfig)
         {
-            _scoreView = scoreView;
             _scoreCalculator = scoreCalculator;
-            _cardRotateAnimation = cardRotateAnimation;
             _cardViewConfig = cardViewConfig;
         }
 
         protected override void Initialize()
         {
+            AddInitializer(new CardsViewInitSystem());
+            AddInitializer(new RotateAnimationInitSystem());
+            
+            AddSystem(new CardsViewSystem());
+            AddSystem(new RotateAnimationSetupSystem());
+            AddSystem(new CardSetAppearSystem());
             AddSystem(new CardCollectAnimationSystem(_scoreCalculator));
-            AddSystem(new RotateAnimationSystem(_cardRotateAnimation, _cardViewConfig));
-            AddSystem(new UpdateViewScore(_scoreView));
+            
+            AddSystem(new RotateAnimationSystem( _cardViewConfig));
+
         }
     }
 }

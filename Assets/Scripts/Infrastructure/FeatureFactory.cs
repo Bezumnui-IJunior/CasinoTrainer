@@ -1,4 +1,6 @@
-﻿using VContainer;
+﻿using System;
+using Scellecs.Morpeh.Addons.Feature;
+using VContainer;
 
 namespace Infrastructure
 {
@@ -13,5 +15,8 @@ namespace Infrastructure
 
         public T Create<T>() =>
             _resolver.Resolve<T>();
+        
+        public BaseFeature Create(Type type) =>
+            (BaseFeature) _resolver.Resolve(type);
     }
 }

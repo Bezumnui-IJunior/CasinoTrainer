@@ -40,6 +40,7 @@ namespace Features.Dealer.Services
             _score.Add(entity);
             _animationComponent.Add(entity).Value = _animation;
             _hiddenCards.Add(entity);
+
             return entity;
         }
     }

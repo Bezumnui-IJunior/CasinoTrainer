@@ -1,4 +1,5 @@
 ﻿using Features.BlackJack.Components;
+using Features.Common.Components;
 using Features.Dealer.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
@@ -10,23 +11,30 @@ namespace Features.BlackJack.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DelegateTurnToDealerSystem : ISystem
     {
-        private Filter _tagFilter;
         private Filter _dealerFilter;
-        private Filter _turnHolderFilter;
         private Stash<DelegateTurnToDealerRequestTag> _delegate;
-        private Stash<TurnHolderComponent> _turnHolder;
         private Stash<FinalTurnTag> _finalTurn;
+        private Filter _playerFilter;
+        private Filter _tagFilter;
+        private Stash<TurnHolderComponent> _turnHolder;
+        private Filter _turnHolderFilter;
 
         public World World { get; set; }
 
         public void OnAwake()
         {
+            _playerFilter = World.Filter
+                .With<PlayerTag>()
+                .With<TurnHolderTag>()
+                .Build();
+
             _tagFilter = World.Filter
                 .With<DelegateTurnToDealerRequestTag>()
                 .Build();
 
             _dealerFilter = World.Filter
                 .With<DealerTag>()
+                .Without<FinalTurnTag>()
                 .Build();
 
             _turnHolderFilter = World.Filter
@@ -36,12 +44,12 @@ namespace Features.BlackJack.Systems
             _delegate = World.GetStash<DelegateTurnToDealerRequestTag>();
             _turnHolder = World.GetStash<TurnHolderComponent>();
             _finalTurn = World.GetStash<FinalTurnTag>();
-
         }
 
         public void OnUpdate(float deltaTime)
         {
             foreach (Entity _ in _tagFilter)
+            foreach (Entity __ in _playerFilter)
             {
                 foreach (Entity cardHolder in _turnHolderFilter)
                 foreach (Entity dealer in _dealerFilter)
@@ -49,9 +57,8 @@ namespace Features.BlackJack.Systems
                     _turnHolder.Get(cardHolder).Value = dealer.Id;
                     _finalTurn.Add(dealer);
                 }
-                
             }
-            
+
             _delegate.RemoveAll();
         }
 

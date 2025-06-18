@@ -12,6 +12,9 @@ namespace Features.Common
             
             AddSystem(new AddTurnHolderSystem());
             AddSystem(new ChangePositionSystem());
+            
+            AddSystem(new DisposeViewSystem());
+            AddSystem(new DisposeSystem());
         }
     }
 }

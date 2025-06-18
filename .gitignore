@@ -2,3 +2,6 @@ Library/*
 Recordings/*
 Temp/*
 Logs/*
+*.app
+*.apk
+ios_build/*

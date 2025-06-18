@@ -1,7 +1,6 @@
 ﻿using Features.BlackJack.Components;
 using Features.BlackJack.Services;
 using Features.Card.Components;
-using Features.View.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
@@ -13,10 +12,10 @@ namespace Features.BlackJack.Systems
     public class CalculateScoreSystem : ISystem
     {
         private readonly IScoreCalculator _scoreCalculator;
-        private Stash<CardHolderComponent> _cardHolderTag;
         private Stash<OwnerComponent> _owner;
         private Stash<ScoreComponent> _score;
-        private Filter _filter;
+        private Filter _cardFilter;
+        private Filter _cardHolderFilter;
 
         public CalculateScoreSystem(IScoreCalculator scoreCalculator)
         {
@@ -27,25 +26,28 @@ namespace Features.BlackJack.Systems
 
         public void OnAwake()
         {
-            _filter = World.Filter
+            _cardFilter = World.Filter
                 .With<OwnerComponent>()
+                .Build();
+
+            _cardHolderFilter = World.Filter
+                .With<ScoreComponent>()
+                .With<CardHolderComponent>()
                 .Build();
 
             _owner = World.GetStash<OwnerComponent>();
             _score = World.GetStash<ScoreComponent>();
-            _cardHolderTag = World.GetStash<CardHolderComponent>();
         }
 
         public void OnUpdate(float deltaTime)
         {
-            foreach (Entity taken in _filter)
+            foreach (Entity cardHolder in _cardHolderFilter)
+            foreach (Entity taken in _cardFilter)
             {
-                Entity owner = _owner.Get(taken).Value;
-
-                if (_score.Has(owner) == false || _cardHolderTag.Has(owner) == false)
+                if (_owner.Get(taken).Value.Id != cardHolder.Id)
                     continue;
 
-                _score.Get(owner).Value = _scoreCalculator.GetSumOfHolder(owner);
+                _score.Get(cardHolder).Value = _scoreCalculator.GetSumOfHolder(cardHolder);
             }
         }
 

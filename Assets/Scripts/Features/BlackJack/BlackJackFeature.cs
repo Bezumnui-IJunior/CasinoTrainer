@@ -1,8 +1,13 @@
-﻿using Features.BlackJack.Configs;
+﻿using Windows;
+using Features.BlackJack.Configs;
 using Features.BlackJack.Services;
 using Features.BlackJack.Systems;
 using Features.Card.Services;
 using Features.Common.Systems;
+using Features.Dealer.Services;
+using Features.GameOver.Systems;
+using Infrastructure;
+using Progress;
 using Scellecs.Morpeh.Addons.Feature;
 using Unity.IL2CPP.CompilerServices;
 using VContainer;
@@ -16,25 +21,34 @@ namespace Features.BlackJack
     public class BlackJackFeature : CombinedFeature
     {
         private readonly IDeckFactory _deckFactory;
-        private readonly IPlayerCollectAnimation _playerCollectAnimation;
         private readonly IScoreCalculator _scoresCalculator;
+        private readonly IStateMachine _stateMachine;
+        private readonly IWindowsManager _windowsManager;
+        private readonly IPlayerFactory _playerFactory;
+        private readonly IPlayerData _playerData;
 
         [Inject]
-        public BlackJackFeature(IDeckFactory deckFactory, IScoreCalculator scoresCalculator, IDealerFactory dealerFactory, IPlayerCollectAnimation playerCollectAnimation, IDealerConfig dealerConfig)
+        public BlackJackFeature(IDeckFactory deckFactory, IScoreCalculator scoresCalculator, IDealerFactory dealerFactory, IDealerConfig dealerConfig,
+            IStateMachine stateMachine, IWindowsManager windowsManager, IPlayerFactory playerFactory, IPlayerData playerData)
         {
             _deckFactory = deckFactory;
             _scoresCalculator = scoresCalculator;
-            _playerCollectAnimation = playerCollectAnimation;
+            _stateMachine = stateMachine;
+            _windowsManager = windowsManager;
+            _playerFactory = playerFactory;
+            _playerData = playerData;
         }
 
         protected override void Initialize()
         {
             AddInitializer(new DeckInitializeSystem(_deckFactory));
-            AddInitializer(new PlayerInitializeSystem(_playerCollectAnimation));
+            AddInitializer(new PlayerInitializeSystem(_playerFactory));
             
+            AddSystem(new StartDealerTurnSystem());
             AddSystem(new DelegateTurnToDealerSystem());
             AddSystem(new RemoveTurnHolderSystem());
             AddSystem(new PlayerShouldTakeCardSystem());
+            // AddSystem(new PlayerScoreDelegateSystem());
             AddSystem(new FaceUpCardSystem());
             AddSystem(new TakeCardSystem());
             AddSystem(new CalculateCardsCountSystem(_scoresCalculator));
@@ -43,6 +57,7 @@ namespace Features.BlackJack
 
             AddSystem(new CardTakenCleanup());
             AddSystem(new CardRotateCleanup());
+            AddSystem(new RestartGameOnRequestSystem(_stateMachine));
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using Features.BlackJack.Components;
+using Features.BlackJack.Services;
 using Features.Dealer.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 
 namespace Features.Dealer.Systems
 {
@@ -11,14 +11,18 @@ namespace Features.Dealer.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DealerWinDeciderSystem : ISystem
     {
+        private readonly IGameOverFactory _gameOverFactory;
         private const int MaxGameScore = 21;
-
 
         private Filter _dealerFilter;
         private Stash<ScoreComponent> _score;
         private Stash<DecidedTag> _decided;
         private Filter _playerFilter;
-        private Stash<WinTag> _win;
+
+        public DealerWinDeciderSystem(IGameOverFactory gameOverFactory)
+        {
+            _gameOverFactory = gameOverFactory;
+        }
 
         public World World { get; set; }
 
@@ -29,22 +33,18 @@ namespace Features.Dealer.Systems
                 .With<TurnHolderTag>()
                 .With<ScoreComponent>()
                 .With<FinalTurnTag>()
-                .Without<LoseTag>()
-                .Without<WinTag>()
                 .Without<DecidedTag>()
                 .Without<DealerTakeCardRequestTag>()
                 .Without<TakeCardCooldownComponent>()
                 .Build();
-            
+
             _playerFilter = World.Filter
                 .With<PlayerTag>()
                 .With<ScoreComponent>()
                 .Build();
 
-            _win = World.GetStash<WinTag>();
             _score = World.GetStash<ScoreComponent>();
             _decided = World.GetStash<DecidedTag>();
-
         }
 
         public void OnUpdate(float deltaTime)
@@ -55,11 +55,9 @@ namespace Features.Dealer.Systems
                 ref int dealerScore = ref _score.Get(dealer).Value;
                 ref int playerScore = ref _score.Get(player).Value;
 
-                if (dealerScore <= MaxGameScore && dealerScore >= playerScore || playerScore > MaxGameScore)
+                if (dealerScore <= MaxGameScore && dealerScore > playerScore || playerScore > MaxGameScore)
                 {
-                    Debug.Log("Dealer win");
-
-                    _win.Add(dealer);
+                    _gameOverFactory.CreateGameOver(dealer);
                     _decided.Add(dealer);
                 }
             }

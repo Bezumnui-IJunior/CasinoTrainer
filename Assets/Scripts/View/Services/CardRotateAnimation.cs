@@ -9,7 +9,7 @@ namespace View.Services
         {
             DOTween.Sequence()
                 .Append(card.DOMoveY(card.transform.position.y + config.CardRotatePositionY, config.CardRotateSecondsUp))
-                .Append(card.DORotate(config.CardRotation, config.CardRotateSecondsRotation))
+                .Append(card.DORotateQuaternion(Quaternion.Euler(config.CardRotation), config.CardRotateSecondsRotation))
                 .Append(card.DOMoveY(card.transform.position.y, config.CardRotateSecondsDown));
         }
     }

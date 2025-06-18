@@ -1,5 +1,6 @@
 ﻿using Features.BlackJack.Configs;
 using Features.BlackJack.Services;
+using Features.Dealer.Services;
 using Features.Dealer.Systems;
 using Scellecs.Morpeh.Addons.Feature;
 using Unity.IL2CPP.CompilerServices;
@@ -14,12 +15,14 @@ namespace Features.Dealer
     {
         private readonly IDealerConfig _dealerConfig;
         private readonly IDealerFactory _dealerFactory;
+        private readonly IGameOverFactory _gameOverFactory;
 
         [Inject]
-        public DealerFeature(IDealerFactory dealerFactory, IDealerConfig dealerConfig)
+        public DealerFeature(IDealerFactory dealerFactory, IDealerConfig dealerConfig, IGameOverFactory gameOverFactory)
         {
             _dealerFactory = dealerFactory;
             _dealerConfig = dealerConfig;
+            _gameOverFactory = gameOverFactory;
         }
 
         protected override void Initialize()
@@ -27,12 +30,15 @@ namespace Features.Dealer
             AddInitializer(new DealerInitializeSystem(_dealerFactory, _dealerConfig));
 
             AddSystem(new DealerCooldownSystem());
-            AddSystem(new DealerLoseDeciderSystem());
-            AddSystem(new DealerWinDeciderSystem());
+
             AddSystem(new DealerDelegateDeciderSystem());
             AddSystem(new DealerIntroPlayedSystem());
             AddSystem(new DealerRotatingDeciderSystem());
+            AddSystem(new DealerDrawDeciderSystem(_gameOverFactory));
+            AddSystem(new DealerLoseDeciderSystem(_gameOverFactory));
+            AddSystem(new DealerWinDeciderSystem(_gameOverFactory));
             AddSystem(new DealerTakeCardDeciderSystem());
+
             AddSystem(new DealerDelegateTurnSystem());
             AddSystem(new DealerRotateCardSystem());
             AddSystem(new DealerTakeCardSystem());

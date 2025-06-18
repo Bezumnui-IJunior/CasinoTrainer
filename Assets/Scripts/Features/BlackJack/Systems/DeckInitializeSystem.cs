@@ -31,31 +31,29 @@ namespace Features.BlackJack.Systems
             World.GetStash<CardHolderComponent>().Add(deck);
             World.GetStash<DeckTag>().Add(deck);
 
-            int orderIndex = 0;
-
-            List<Entity> cards = new List<Entity>(128);
+            Queue<int> orders = GetRandomOrders();
 
             foreach (Denominations denomination in Enum.GetValues(typeof(Denominations)))
             foreach (Suits suit in Enum.GetValues(typeof(Suits)))
-                cards.Add(_deckFactory.CreateCard(World, denomination, suit, deck, orderIndex++));
-
-            Shuffle(cards);
+                _deckFactory.CreateCard(World, denomination, suit, deck, orders.Dequeue());
         }
 
         public void Dispose() { }
 
-        private void Shuffle(List<Entity> cards)
+        private Queue<int> GetRandomOrders(int size = 52)
         {
-            Stash<OrderComponent> order = World.GetStash<OrderComponent>();
+            List<int> result = new List<int>(size);
 
-            foreach (Entity card in cards)
+            for (int i = 0; i < size; i++)
+                result.Add(i);
+
+            for (int i = 0; i < size; i++)
             {
-                int randomIndex = Random.Range(0, cards.Count);
-                ref OrderComponent order1 = ref order.Get(card);
-                ref OrderComponent order2 = ref order.Get(cards[randomIndex]);
-
-                (order2.Value, order1.Value) = (order1.Value, order2.Value);
+                int randomIndex = Random.Range(0, size);
+                (result[i], result[randomIndex]) = (result[randomIndex], result[i]);
             }
+
+            return new Queue<int>(result);
         }
     }
 }
