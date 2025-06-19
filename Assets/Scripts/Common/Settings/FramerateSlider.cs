@@ -14,12 +14,13 @@ namespace Common.Settings
     {
         [SerializeField] private Slider _slider;
         [SerializeField] private TextMeshProUGUI _textMeshPro;
+        
         private ISettings _settings;
 
-        private void Awake()
+        [Inject]
+        private void Constructor(ISettings settings)
         {
-            if (_slider == null)
-                _slider = GetComponent<Slider>();
+            _settings = settings;
         }
 
         private void Update()
@@ -36,12 +37,6 @@ namespace Common.Settings
         private void OnDisable()
         {
             _slider.onValueChanged.RemoveListener(OnValueChanged);
-        }
-
-        [Inject]
-        private void Constructor(ISettings settings)
-        {
-            _settings = settings;
         }
 
         private void OnValueChanged(float value)

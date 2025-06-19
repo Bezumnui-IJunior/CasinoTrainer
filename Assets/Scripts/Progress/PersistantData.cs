@@ -19,9 +19,9 @@ namespace Progress
 
         protected static bool TryLoad<T>(out T result, string prefsKey) where T : PersistantData
         {
-            if (new PersistantSerializer(prefsKey).TryLoad<T>(out T resultRaw))
+            if (new PersistantSerializer(prefsKey).TryLoad(out T resultRaw))
             {
-                result = (T)resultRaw;
+                result = resultRaw;
 
                 return true;
             }
@@ -29,8 +29,6 @@ namespace Progress
             result = null;
 
             return false;
-
         }
-           
     }
 }

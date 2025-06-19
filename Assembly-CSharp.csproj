@@ -125,6 +125,7 @@
     <Compile Include="Assets\Scripts\Features\BlackJack\BlackJackFeature.cs" />
     <Compile Include="Assets\Scripts\Features\Dealer\Systems\DealerDelegateTurnSystem.cs" />
     <Compile Include="Assets\Scripts\GameStates\BlackJackStartState.cs" />
+    <Compile Include="Assets\Scripts\View\UI\Buttons\DoubleInput.cs" />
     <Compile Include="Assets\Scripts\Progress\IPersistant.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Providers\EntitySelfInitializer.cs" />
     <Compile Include="Assets\Scripts\Infrastructure\Instantilizer.cs" />

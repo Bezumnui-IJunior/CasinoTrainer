@@ -19,7 +19,7 @@ namespace Progress
         public void Save() =>
             _serializer.Save(this);
 
-        public bool Load<T>()=>
+        public bool Load<T>() =>
             _serializer.Load<T>(this);
     }
 }

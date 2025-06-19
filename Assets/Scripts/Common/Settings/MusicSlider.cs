@@ -1,7 +1,6 @@
 using Progress;
 using Sounds;
 using Unity.IL2CPP.CompilerServices;
-using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
 
@@ -10,41 +9,34 @@ namespace Common.Settings
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public class MusicSlider : MonoBehaviour
+    public class MusicSlider
     {
-        private const float PercentMultiplier = 100f;
+        private readonly IBackgroundMusic _backgroundMusic;
+        private readonly ISettings _settings;
+        private readonly Slider _slider;
 
-        [SerializeField] private Slider _slider;
-        private IBackgroundMusic _backgroundMusic;
-        private ISettings _settings;
-
-        private void Awake()
+        [Inject]
+        public MusicSlider(Slider slider, ISettings settings, IBackgroundMusic backgroundMusic)
         {
-            if (_slider == null)
-                _slider = GetComponent<Slider>();
+            _slider = slider;
+            _settings = settings;
+            _backgroundMusic = backgroundMusic;
         }
 
-        private void Update()
+        public void Update()
         {
             _backgroundMusic.AudioSource.volume = _slider.value;
         }
 
-        private void OnEnable()
+        public void Enable()
         {
             _slider.value = _backgroundMusic.AudioSource.volume;
             _slider.onValueChanged.AddListener(OnValueChanged);
         }
 
-        private void OnDisable()
+        public void Disable()
         {
             _slider.onValueChanged.RemoveListener(OnValueChanged);
-        }
-
-        [Inject]
-        private void Constructor(ISettings settings, IBackgroundMusic backgroundMusic)
-        {
-            _settings = settings;
-            _backgroundMusic = backgroundMusic;
         }
 
         private void OnValueChanged(float value)
