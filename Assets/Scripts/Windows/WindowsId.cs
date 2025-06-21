@@ -11,5 +11,6 @@ namespace Windows
         SettingsWindow,
         MoneyWindow,
         PlaceBetWindow,
+        ShopWindow,
     }
 }

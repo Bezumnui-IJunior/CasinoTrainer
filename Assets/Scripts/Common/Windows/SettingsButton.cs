@@ -12,30 +12,29 @@ namespace Common.Windows
     [Il2CppSetOption(Option.NullChecks, false)]
     [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
-    public class SettingsWindow : Window
+    public class SettingsButton : Window
     {
         private const float DebugAddMoneyValue = 100;
-        [SerializeField] private Button _exitButton;
+        [SerializeField] private Button _exitButtonUI;
         [SerializeField] private Button _addMoneyButton;
         [SerializeField] private Slider _musicSliderUI;
-        
+
+        private ExitButton _exitButton;
         private MusicSlider _musicSlider;
         private IPlayerData _playerData;
-        private ISettings _settings;
-        private IWindowsManager _windowsManager;
 
         private void OnEnable()
         {
-            _exitButton.onClick.AddListener(OnExitClicked);
             _addMoneyButton.onClick.AddListener(OnAddMoneyClicked);
             _musicSlider.Enable();
+            _exitButton.Enable();
         }
 
         private void OnDisable()
         {
-            _exitButton.onClick.RemoveListener(OnExitClicked);
             _addMoneyButton.onClick.RemoveListener(OnAddMoneyClicked);
             _musicSlider.Disable();
+            _exitButton.Disable();
         }
 
         protected override void OnUpdate()
@@ -46,16 +45,9 @@ namespace Common.Windows
         [Inject]
         private void Construct(ISettings settings, IWindowsManager windowsManager, IPlayerData playerData, IBackgroundMusic backgroundMusic)
         {
-            _settings = settings;
-            _windowsManager = windowsManager;
             _playerData = playerData;
             _musicSlider = new MusicSlider(_musicSliderUI, settings, backgroundMusic);
-        }
-
-        private void OnExitClicked()
-        {
-            _settings.Save();
-            _windowsManager.Close(WindowsId.SettingsWindow);
+            _exitButton = new ExitButton(settings, windowsManager, _exitButtonUI, WindowsId.SettingsWindow);
         }
 
         private void OnAddMoneyClicked()

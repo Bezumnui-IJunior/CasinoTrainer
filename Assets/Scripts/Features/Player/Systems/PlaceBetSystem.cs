@@ -42,6 +42,7 @@ namespace Features.Player.Systems
                 int betValue = bet.Value;
 
                 _playerData.ChargeMoney(betValue);
+                _playerData.Save();
                 _bet.Add(player).Value = betValue;
             }
         }

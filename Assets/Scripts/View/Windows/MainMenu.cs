@@ -15,6 +15,8 @@ namespace View.Windows
     {
         [SerializeField] private Button _playButton;
         [SerializeField] private Button _settingsButton;
+        [SerializeField] private Button _shopButton;
+
         private IStateMachine _stateMachine;
         private IWindowsManager _windowsManager;
 
@@ -27,12 +29,14 @@ namespace View.Windows
         {
             _playButton.onClick.AddListener(OnPlayClicked);
             _settingsButton.onClick.AddListener(OnSettingsClicked);
+            _shopButton.onClick.AddListener(OnShopClicked);
         }
 
         private void OnDisable()
         {
             _playButton.onClick.RemoveListener(OnPlayClicked);
             _settingsButton.onClick.RemoveListener(OnSettingsClicked);
+            _shopButton.onClick.RemoveListener(OnShopClicked);
         }
 
         [Inject]
@@ -50,7 +54,12 @@ namespace View.Windows
 
         private void OnSettingsClicked()
         {
-            _windowsManager.Open(WindowsId.SettingsWindow);
+            _windowsManager.OpenOrLeaveOnly(WindowsId.SettingsWindow);
+        }
+
+        private void OnShopClicked()
+        {
+            _windowsManager.OpenOrLeaveOnly(WindowsId.ShopWindow);
         }
     }
 }

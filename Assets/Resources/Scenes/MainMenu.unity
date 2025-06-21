@@ -1144,7 +1144,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -1594,7 +1594,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'version: 0.01-alpha'
+  m_text: 'version: 0.01-development'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8005641c0fbbc44d38f61955b82c6f72, type: 2}
   m_sharedMaterial: {fileID: -8690711754771408809, guid: 8005641c0fbbc44d38f61955b82c6f72, type: 2}
@@ -1803,6 +1803,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playButton: {fileID: 382156688}
   _settingsButton: {fileID: 1229283047}
+  _shopButton: {fileID: 798396023}
 --- !u!1 &1707097850
 GameObject:
   m_ObjectHideFlags: 0
