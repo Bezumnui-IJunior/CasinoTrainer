@@ -12,8 +12,6 @@ namespace Features.Dealer.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DealerLoseDeciderSystem : ISystem
     {
-        private const int MaxDealerScore = 17;
-        private const int MaxGameScore = 21;
         private readonly IGameOverFactory _gameOverFactory;
 
         private Filter _dealerFilter;
@@ -58,8 +56,8 @@ namespace Features.Dealer.Systems
                 ref int dealerScore = ref _score.Get(dealer).Value;
                 ref int playerScore = ref _score.Get(player).Value;
 
-                if (dealerScore > MaxGameScore ||
-                    (playerScore > dealerScore && dealerScore >= MaxDealerScore && playerScore <= MaxGameScore))
+                if (dealerScore > Constants.MaxGameScore ||
+                    (playerScore > dealerScore && dealerScore >= Constants.MaxDealerScore && playerScore <= Constants.MaxGameScore))
                 {
                     _gameOverFactory.CreateGameOver(player);
                     _decided.Add(dealer);

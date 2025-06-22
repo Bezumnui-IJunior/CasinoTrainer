@@ -6,7 +6,7 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-public class EntryPoint : IStartable
+public class  EntryPoint : IStartable
 {
     private readonly IObjectResolver _resolver;
     private readonly ISettings _settings;
@@ -29,7 +29,6 @@ public class EntryPoint : IStartable
 
         DOTween.Init();
         Application.targetFrameRate = _settings.TargetFrameRate;
-        _settings.Save();
         _stateMachine.ChangeState<BootstrapState>();
     }
 }

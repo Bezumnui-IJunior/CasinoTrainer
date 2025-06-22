@@ -1,4 +1,5 @@
 ﻿using Features.BlackJack.Components;
+using Features.BlackJack.Services;
 using Features.Dealer.Components;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
@@ -10,8 +11,6 @@ namespace Features.Dealer.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DealerTakeCardDeciderSystem : ISystem
     {
-        private const int MaxDealerScore = 17;
-
         private Filter _dealerFilter;
         private Stash<DealerTakeCardRequestTag> _dealerTakeCardRequest;
         private Stash<DecidedTag> _decided;
@@ -41,7 +40,7 @@ namespace Features.Dealer.Systems
             {
                 ref int score = ref _score.Get(dealer).Value;
 
-                if (score < MaxDealerScore)
+                if (score < Constants.MaxDealerScore)
                 {
                     _dealerTakeCardRequest.Add(dealer);
                     _decided.Add(dealer);

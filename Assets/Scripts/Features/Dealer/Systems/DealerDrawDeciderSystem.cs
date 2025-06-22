@@ -12,8 +12,6 @@ namespace Features.Dealer.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DealerDrawDeciderSystem : ISystem
     {
-        private const int MaxDealerScore = 17;
-        private const int MaxGameScore = 21;
         private readonly IGameOverFactory _gameOverFactory;
 
         private Filter _dealerFilter;
@@ -58,8 +56,8 @@ namespace Features.Dealer.Systems
                 ref int dealerScore = ref _score.Get(dealer).Value;
                 ref int playerScore = ref _score.Get(player).Value;
 
-                if (dealerScore <= MaxGameScore && playerScore <= MaxGameScore &&
-                    playerScore == dealerScore && dealerScore >= MaxDealerScore)
+                if (dealerScore <= Constants.MaxGameScore && playerScore <= Constants.MaxGameScore &&
+                    playerScore == dealerScore && dealerScore >= Constants.MaxDealerScore)
                 {
                     _gameOverFactory.CreateDraw();
                     _decided.Add(dealer);

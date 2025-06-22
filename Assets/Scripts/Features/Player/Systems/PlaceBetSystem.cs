@@ -12,17 +12,11 @@ namespace Features.Player.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class PlaceBetSystem : ICleanupSystem
     {
-        private readonly IPlayerData _playerData;
         private Stash<BetComponent> _bet;
         private Filter _filter;
         private Stash<PlaceBetRequest> _request;
         private Stash<MoneyHolderComponent> _moneyHolder;
         private Stash<SaveRequestTag> _saveRequest;
-
-        public PlaceBetSystem(IPlayerData playerData)
-        {
-            _playerData = playerData;
-        }
 
         public World World { get; set; }
 

@@ -20,7 +20,7 @@ namespace Features.Player
 
         protected override void Initialize()
         {
-            AddSystem(new PlaceBetSystem(_playerData));
+            AddSystem(new PlaceBetSystem());
             AddSystem(new PlacedBetWindowSystem(_windowsManager));
             AddSystem(new PlayerSaveSystem(_playerData));
 

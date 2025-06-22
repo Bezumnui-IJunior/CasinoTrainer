@@ -66,13 +66,15 @@ namespace Features.BlackJack.Systems
                 ref OwnerComponent owner = ref _owner.Get(card);
                 ref OrderComponent order = ref _order.Get(card);
 
-                if (owner.Value.Id != deck.Id)
+                ref Entity ownerValue = ref owner.Value;
+
+                if (ownerValue.Id != deck.Id)
                     continue;
 
                 if (order.Value-- != 0)
                     continue;
 
-                int totalCards = _cardHolder.Get(owner.Value).Value;
+                int totalCards = _cardHolder.Get(ownerValue).Value;
                 owner.Value = newOwner;
 
                 if (shouldHideCard == false)

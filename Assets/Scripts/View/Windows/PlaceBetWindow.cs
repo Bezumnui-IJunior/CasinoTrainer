@@ -21,6 +21,7 @@ namespace View.Windows
         [SerializeField] private TMP_InputField _inputField;
         [SerializeField] private Button _confirmButton;
         [SerializeField] private Button _exitButton;
+        
         private Stash<PlaceBetRequest> _betRequest;
         private GoToMenuButton _goToMenuButton;
         private IPlayerData _playerData;
