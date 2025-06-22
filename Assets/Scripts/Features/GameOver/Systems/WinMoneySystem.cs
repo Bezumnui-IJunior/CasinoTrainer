@@ -13,7 +13,6 @@ namespace Features.GameOver.Systems
     public class WinMoneySystem : ISystem
     {
         private const int WinMultiplier = 2;
-        private readonly IPlayerData _playerData;
         private readonly IWindowsManager _windowsManager;
         private Stash<BetComponent> _bet;
         private Filter _dealerFilter;
@@ -21,11 +20,9 @@ namespace Features.GameOver.Systems
         private Filter _playerFilter;
         private Stash<PaidTag> _tag;
         private Stash<WinnerComponent> _winner;
-
-        public WinMoneySystem(IPlayerData playerData)
-        {
-            _playerData = playerData;
-        }
+        private Stash<MoneyHolderComponent> _moneyHolder;
+        private Stash<SaveRequestTag> _saveRequest;
+        
 
         public World World { get; set; }
 
@@ -39,12 +36,16 @@ namespace Features.GameOver.Systems
 
             _playerFilter = World.Filter
                 .With<PlayerTag>()
+                .With<MoneyHolderComponent>()
                 .With<BetComponent>()
                 .Build();
 
             _winner = World.GetStash<WinnerComponent>();
             _bet = World.GetStash<BetComponent>();
             _tag = World.GetStash<PaidTag>();
+            _moneyHolder = World.GetStash<MoneyHolderComponent>();
+            _saveRequest = World.GetStash<SaveRequestTag>();
+
         }
 
         public void OnUpdate(float deltaTime)
@@ -56,9 +57,9 @@ namespace Features.GameOver.Systems
                 ref int bet = ref _bet.Get(player).Value;
 
                 if (_winner.Get(winnerEntity).Value == player.Id)
-                    _playerData.AddMoney(bet * WinMultiplier);
+                    _moneyHolder.Get(player).Value += bet * WinMultiplier;
 
-                _playerData.Save();
+                _saveRequest.Add(player);
             }
         }
 

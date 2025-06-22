@@ -33,12 +33,7 @@ namespace GameStates
         public override void Enter()
         {
             _blackJackFeatures.AddFeatures();
-
-            // _windowsManager.OpenOrLeaveOnly(
-            //     WindowsId.BlackJackPlayButtons,
-            //     WindowsId.ScoreCounter,
-            //     WindowsId.MoneyWindow
-            // );
+            
             _windowsManager.OpenOrLeaveOnly(
                 WindowsId.PlaceBetWindow,
                 WindowsId.MoneyWindow

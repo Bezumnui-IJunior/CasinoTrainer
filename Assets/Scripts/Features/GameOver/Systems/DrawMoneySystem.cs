@@ -12,7 +12,6 @@ namespace Features.GameOver.Systems
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class DrawMoneySystem : ISystem
     {
-        private readonly IPlayerData _playerData;
         private readonly IWindowsManager _windowsManager;
         private Stash<BetComponent> _bet;
         private Filter _dealerFilter;
@@ -20,12 +19,10 @@ namespace Features.GameOver.Systems
         private Filter _playerFilter;
         private Stash<PaidTag> _tag;
         private Stash<WinnerComponent> _winner;
+        private Stash<MoneyHolderComponent> _moneyHolder;
+        private Stash<SaveRequestTag> _saveRequest;
 
-        public DrawMoneySystem(IPlayerData playerData)
-        {
-            _playerData = playerData;
-        }
-
+   
         public World World { get; set; }
 
         public void OnAwake()
@@ -38,10 +35,13 @@ namespace Features.GameOver.Systems
             _playerFilter = World.Filter
                 .With<PlayerTag>()
                 .With<BetComponent>()
+                .With<MoneyHolderComponent>()
                 .Build();
 
             _bet = World.GetStash<BetComponent>();
             _tag = World.GetStash<PaidTag>();
+            _moneyHolder = World.GetStash<MoneyHolderComponent>();
+            _saveRequest = World.GetStash<SaveRequestTag>();
         }
 
         public void OnUpdate(float deltaTime)
@@ -52,9 +52,8 @@ namespace Features.GameOver.Systems
                 ref int bet = ref _bet.Get(player).Value;
                 _tag.Add(gameOver);
 
-                _playerData.AddMoney(bet);
-
-                _playerData.Save();
+                _moneyHolder.Get(player).Value += bet;
+                _saveRequest.Add(player);
             }
         }
 

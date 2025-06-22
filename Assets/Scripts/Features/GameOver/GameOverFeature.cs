@@ -12,14 +12,12 @@ namespace Features.GameOver
     [Il2CppSetOption(Option.DivideByZeroChecks, false)]
     public class GameOverFeature : CombinedFeature
     {
-        private readonly IPlayerData _playerData;
         private readonly IWindowsManager _windowsManager;
 
         [Inject]
-        public GameOverFeature(IWindowsManager windowsManager, IPlayerData playerData)
+        public GameOverFeature(IWindowsManager windowsManager)
         {
             _windowsManager = windowsManager;
-            _playerData = playerData;
         }
 
         protected override void Initialize()
@@ -27,8 +25,8 @@ namespace Features.GameOver
             AddSystem(new GameOverWindowSystem(_windowsManager));
             AddSystem(new GameOverDrawSystem(_windowsManager));
             AddSystem(new GameOverTurnSystem());
-            AddSystem(new WinMoneySystem(_playerData));
-            AddSystem(new DrawMoneySystem(_playerData));
+            AddSystem(new WinMoneySystem());
+            AddSystem(new DrawMoneySystem());
         }
     }
 }

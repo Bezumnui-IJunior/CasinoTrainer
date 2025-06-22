@@ -2,9 +2,7 @@ namespace Progress
 {
     public interface IPlayerData
     {
-        float PlayerMoney { get; }
+        float PlayerMoney { get; set; }
         void Save();
-        void ChargeMoney(float value);
-        void AddMoney(float value);
     }
 }

@@ -22,6 +22,8 @@ namespace Features.Player
         {
             AddSystem(new PlaceBetSystem(_playerData));
             AddSystem(new PlacedBetWindowSystem(_windowsManager));
+            AddSystem(new PlayerSaveSystem(_playerData));
+
             AddSystem(new DisposeBetRequestSystem());
         }
     }

@@ -52,7 +52,7 @@ namespace Common.Windows
 
         private void OnAddMoneyClicked()
         {
-            _playerData.AddMoney(DebugAddMoneyValue);
+            _playerData.PlayerMoney += DebugAddMoneyValue;
             _playerData.Save();
         }
     }
