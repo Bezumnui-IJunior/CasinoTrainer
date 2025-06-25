@@ -69,6 +69,7 @@ public class GameScope : LifetimeScope
     {
         builder.Register<StateMachine>(Lifetime.Singleton).As<IStateMachine>();
         builder.Register<BootstrapState>(Lifetime.Singleton);
+        builder.Register<LoaderState>(Lifetime.Singleton);
         builder.Register<SetupMusicState>(Lifetime.Singleton);
         builder.Register<MainMenuState>(Lifetime.Singleton);
         builder.Register<ActualizeState>(Lifetime.Singleton);
@@ -90,6 +91,7 @@ public class GameScope : LifetimeScope
         builder.Register<BackgroundMusic>(Lifetime.Singleton).As<IBackgroundMusic>();
         builder.Register<NotificationService>(Lifetime.Singleton).As<INotificationService>();
         builder.Register<MoneyAdvertService>(Lifetime.Singleton).As<IMoneyAdvertService>();
+        builder.Register<SoundFXService>(Lifetime.Singleton).As<ISoundFXService>();
         builder.RegisterInstance(new MonetizationService()).As<IMonetizationService>();
     }
 

@@ -46,6 +46,9 @@ namespace Common.Windows
 
             _watchAdButton.onClick.AddListener(OnWatchAdClicked);
 
+            if (TrySetCapped())
+                return;
+
             if (_monetizationService.IsInitialized == false)
             {
                 SetLoading();
@@ -98,10 +101,10 @@ namespace Common.Windows
         private void OnAdClosed(LevelPlayAdInfo obj)
         {
             _moneyAdvertService.WatchAdvert();
-            
+
             if (_moneyAdvertService.IsFirstAdvert())
                 _notificationsFactory.ScheduleAdvertReadyReminder();
-            
+
             SetLoading();
             _advert.Load();
         }
@@ -122,7 +125,7 @@ namespace Common.Windows
         {
             if (TrySetCapped())
                 return;
-            
+
             _advert.Load();
             SetLoading();
         }
@@ -131,13 +134,14 @@ namespace Common.Windows
         {
             if (TrySetCapped())
                 return;
-            
+
             if (RewardedAdvertisement.IsAdReady() == false)
             {
                 LoadAdvert();
+
                 return;
             }
-            
+
             RewardedAdvertisement.ShowAd();
             _watchAdButton.interactable = false;
         }
@@ -150,7 +154,6 @@ namespace Common.Windows
             SetCapped();
 
             return true;
-
         }
 
         private void OnAdRewarded(LevelPlayAdInfo info, LevelPlayReward reward)
@@ -164,7 +167,7 @@ namespace Common.Windows
         {
             if (RewardedAdvertisement == null)
                 throw new NullReferenceException();
-            
+
             ShowAdvert();
         }
 

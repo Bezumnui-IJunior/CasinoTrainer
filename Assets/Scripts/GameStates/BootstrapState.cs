@@ -14,7 +14,7 @@ namespace GameStates
 
         public override void Enter()
         {
-            ChangeState<SetupMusicState>();
+            ChangeState<LoaderState>();
         }
     }
 }

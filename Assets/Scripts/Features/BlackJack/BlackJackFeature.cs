@@ -7,8 +7,10 @@ using Features.Dealer.Services;
 using Infrastructure;
 using Progress;
 using Scellecs.Morpeh.Addons.Feature;
+using Sounds.Configs;
 using Unity.IL2CPP.CompilerServices;
 using VContainer;
+using View;
 
 namespace Features.BlackJack
 {
@@ -23,10 +25,12 @@ namespace Features.BlackJack
         private readonly IScoreCalculator _scoresCalculator;
         private readonly IStateMachine _stateMachine;
         private readonly IWindowsManager _windowsManager;
+        private readonly ISoundFXService _soundFXService;
+        private readonly IMusicConfig _musicConfig;
 
         [Inject]
         public BlackJackFeature(IDeckFactory deckFactory, IScoreCalculator scoresCalculator, IDealerFactory dealerFactory, IDealerConfig dealerConfig,
-            IStateMachine stateMachine, IWindowsManager windowsManager, IPlayerFactory playerFactory, IPlayerData playerData)
+            IStateMachine stateMachine, IWindowsManager windowsManager, IPlayerFactory playerFactory, IPlayerData playerData, IMusicConfig musicConfig, ISoundFXService soundFXService)
         {
             _deckFactory = deckFactory;
             _scoresCalculator = scoresCalculator;
@@ -34,6 +38,8 @@ namespace Features.BlackJack
             _windowsManager = windowsManager;
             _playerFactory = playerFactory;
             _playerData = playerData;
+            _musicConfig = musicConfig;
+            _soundFXService = soundFXService;
         }
 
         protected override void Initialize()
@@ -48,6 +54,7 @@ namespace Features.BlackJack
             // AddSystem(new PlayerScoreDelegateSystem());
             AddSystem(new FaceUpCardSystem());
             AddSystem(new TakeCardSystem());
+            AddSystem(new PlayTakeCardSoundSystem(_soundFXService, _musicConfig));
             AddSystem(new CalculateCardsCountSystem(_scoresCalculator));
             AddSystem(new CalculateScoreSystem(_scoresCalculator));
             AddSystem(new CalculateHiddenCardsSystem());

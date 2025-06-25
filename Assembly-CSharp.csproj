@@ -119,6 +119,7 @@
     <Compile Include="Assets/Scripts/Windows/Configs/WindowsConfig.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/Components/WinnerComponent.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/Components/DeckTag.cs" />
+    <Compile Include="Assets/Scripts/GameStates/LoaderState.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/Components/HiddenCardsComponent.cs" />
     <Compile Include="Assets/Scripts/Features/Dealer/Components/DealerTakeCardRequestTag.cs" />
     <Compile Include="Assets/Scripts/View/UIInitializer.cs" />
@@ -130,12 +131,14 @@
     <Compile Include="Assets/Scripts/View/Services/IScoreView.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/Services/ScoreCalculator.cs" />
     <Compile Include="Assets/Scripts/Sounds/Configs/IMusicConfig.cs" />
+    <Compile Include="Assets/Scripts/Features/BlackJack/Systems/PlayTakeCardSoundSystem.cs" />
     <Compile Include="Assets/Scripts/Monetization/IRewardedAdvert.cs" />
     <Compile Include="Assets/Scripts/Features/View/ViewFeature.cs" />
     <Compile Include="Assets/Scripts/Features/View/Systems/CardCollectAnimationSystem.cs" />
     <Compile Include="Assets/Scripts/Progress/IPlayerData.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/Components/PlayerConsumeRequestTag.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/BlackJackFeature.cs" />
+    <Compile Include="Assets/Scripts/Progress/EntitySnapshot.cs" />
     <Compile Include="Assets/Scripts/Features/Dealer/Systems/DealerDelegateTurnSystem.cs" />
     <Compile Include="Assets/Scripts/GameStates/BlackJackStartState.cs" />
     <Compile Include="Assets/Scripts/Progress/MoneyAdvertService.cs" />
@@ -167,6 +170,7 @@
     <Compile Include="Assets/Scripts/Windows/WindowsManager.cs" />
     <Compile Include="Assets/Scripts/Progress/PlayerData.cs" />
     <Compile Include="Assets/Scripts/Features/Common/Components/DisposingTag.cs" />
+    <Compile Include="Assets/Scripts/Common/Settings/SoundFXSlider.cs" />
     <Compile Include="Assets/Scripts/View/Services/IDealerCollectAnimation.cs" />
     <Compile Include="Assets/Scripts/View/UI/Buttons/GoToMenuButton.cs" />
     <Compile Include="Assets/Scripts/Features/Dealer/Systems/DealerCooldownScheduleSystem.cs" />
@@ -193,6 +197,7 @@
     <Compile Include="Assets/Scripts/View/IPlayerViewConfig.cs" />
     <Compile Include="Assets/Scripts/Features/Common/Components/TurnHolderComponent.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/Systems/PlayerScoreDelegateSystem.cs" />
+    <Compile Include="Assets/Scripts/View/DontDestroyOnLoadInitializer.cs" />
     <Compile Include="Assets/Scripts/Features/View/Components/TakenTag.cs" />
     <Compile Include="Assets/Scripts/Windows/Configs/WindowConfig.cs" />
     <Compile Include="Assets/Scripts/Sounds/BackgroundMusic.cs" />
@@ -222,12 +227,14 @@
     <Compile Include="Assets/Scripts/Features/Card/Components/FaceMeshRendererComponent.cs" />
     <Compile Include="Assets/Scripts/Infrastructure/FeatureFactory.cs" />
     <Compile Include="Assets/Scripts/Infrastructure/State.cs" />
+    <Compile Include="Assets/Scripts/Features/GameOver/Components/SoundPlayedTag.cs" />
     <Compile Include="Assets/Scripts/Infrastructure/IState.cs" />
     <Compile Include="Assets/Scripts/Features/Dealer/Systems/DealerDrawDeciderSystem.cs" />
     <Compile Include="Assets/Scripts/Features/Dealer/Systems/DealerCooldownSystem.cs" />
     <Compile Include="Assets/Scripts/Features/View/Systems/RotateAnimationSystem.cs" />
     <Compile Include="Assets/Scripts/View/Windows/ScoreWindow.cs" />
     <Compile Include="Assets/Scripts/Features/Card/Components/SetAppearTag.cs" />
+    <Compile Include="Assets/Scripts/View/Services/ISoundFXService.cs" />
     <Compile Include="Assets/Scripts/Features/GameOver/GameOverFeature.cs" />
     <Compile Include="Assets/Scripts/Features/Dealer/DealerFeature.cs" />
     <Compile Include="Assets/Scripts/View/CardViewConfig.cs" />
@@ -240,6 +247,7 @@
     <Compile Include="Assets/Scripts/View/Windows/PlaceBetWindow.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/Components/ScoreComponent.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/Components/TakeCardRequestTag.cs" />
+    <Compile Include="Assets/Scripts/Features/GameOver/Systems/GameOverPlaySoundSystem.cs" />
     <Compile Include="Assets/Scripts/View/UI/Display/MoneyCounterView.cs" />
     <Compile Include="Assets/Scripts/Infrastructure/ISceneFactory.cs" />
     <Compile Include="Assets/Scripts/Infrastructure/IFeatureFactory.cs" />
@@ -251,6 +259,7 @@
     <Compile Include="Assets/Scripts/Infrastructure/Providers/IComponentsProvider.cs" />
     <Compile Include="Assets/Scripts/Features/Common/CommonFeatures.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/Components/GameOverTag.cs" />
+    <Compile Include="Assets/Scripts/View/Services/SoundFXService.cs" />
     <Compile Include="Assets/Scripts/Features/Card/Services/CardsView.cs" />
     <Compile Include="Assets/Scripts/Features/GameOver/Systems/WinMoneySystem.cs" />
     <Compile Include="Assets/Scripts/Features/Card/Components/OrderComponent.cs" />
@@ -276,6 +285,7 @@
     <Compile Include="Assets/Scripts/Features/View/Components/PlayerDoneCollectingRequest.cs" />
     <Compile Include="Assets/Scripts/Features/View/Systems/RotateAnimationInitSystem.cs" />
     <Compile Include="Assets/Scripts/Features/Dealer/Systems/DealerIntroPlayedSystem.cs" />
+    <Compile Include="Assets/Scripts/View/SoundFxInitializer.cs" />
     <Compile Include="Assets/Scripts/Features/Common/Systems/DisposeViewSystem.cs" />
     <Compile Include="Assets/Scripts/Features/Dealer/Components/DecidedTag.cs" />
     <Compile Include="Assets/Scripts/Features/BlackJack/Configs/DealerConfig.cs" />

@@ -13,6 +13,7 @@ namespace Progress
         [ShowInInspector] [JsonProperty] public float MusicVolume { get; set; } = 1f;
         [ShowInInspector] [JsonProperty] public int TargetFrameRate { get; set; } = 60;
         [ShowInInspector] [JsonProperty] public int DefaultBet { get; set; } = 20;
+        [ShowInInspector] [JsonProperty] public float SoundFXVolume { get; set; } = 1f;
 
         public bool Load() =>
             Load<Settings>();

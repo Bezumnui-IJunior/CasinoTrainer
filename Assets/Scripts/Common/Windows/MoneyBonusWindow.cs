@@ -2,10 +2,12 @@ using System;
 using Windows;
 using Notifications;
 using Progress;
+using Sounds.Configs;
 using Unity.IL2CPP.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
+using View;
 
 namespace Common.Windows
 {
@@ -21,9 +23,14 @@ namespace Common.Windows
         private INotificationService _notificationService;
         private ISettings _settings;
         private INotificationsFactory _notificationsFactory;
+        private IMusicConfig _musicConfig;
+        private ISoundFXService _soundFXService;
 
-        protected override void Initialize() =>
+        protected override void Initialize() 
+        {
+            _soundFXService.PlayClip(_musicConfig.InfoSound);
             _collectButton.onClick.AddListener(OnClick);
+        }
 
         protected override void Deinitialize() =>
             _collectButton.onClick.RemoveListener(OnClick);
@@ -43,13 +50,15 @@ namespace Common.Windows
         }
 
         [Inject]
-        private void Construct(IPlayerData playerData, IWindowsManager windowsManager, INotificationsFactory notificationsFactory, ISettings settings, INotificationService notificationService)
+        private void Construct(IPlayerData playerData, IWindowsManager windowsManager, INotificationsFactory notificationsFactory, ISettings settings, INotificationService notificationService, IMusicConfig musicConfig, ISoundFXService soundFXService)
         {
             _playerData = playerData;
             _windowsManager = windowsManager;
             _notificationsFactory = notificationsFactory;
             _settings = settings;
             _notificationService = notificationService;
+            _musicConfig = musicConfig;
+            _soundFXService = soundFXService;
         }
     }
 }

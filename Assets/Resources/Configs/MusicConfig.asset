@@ -12,4 +12,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d3f30f57544bc596db1ec50359ef7f, type: 3}
   m_Name: MusicConfig
   m_EditorClassIdentifier: 
-  _backgroundMusic: {fileID: 8300000, guid: 7fc1d837a9e854717aeb6a355d7bd676, type: 3}

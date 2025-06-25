@@ -19,6 +19,7 @@ namespace Common.Windows
         [SerializeField] private ExitButton _exitButton;
         [SerializeField] private Button _debugButton;
         [SerializeField] private Slider _musicSliderUI;
+        [SerializeField] private SoundFXSlider _soundFXSlider;
 
         private MusicSlider _musicSlider;
         private IPlayerData _playerData;
@@ -46,6 +47,7 @@ namespace Common.Windows
             _playerData = playerData;
             _musicSlider = new MusicSlider(_musicSliderUI, settings, backgroundMusic);
             resolver.Inject(_exitButton);
+            resolver.Inject(_soundFXSlider);
         }
 
         private void OnDebugClicked()
