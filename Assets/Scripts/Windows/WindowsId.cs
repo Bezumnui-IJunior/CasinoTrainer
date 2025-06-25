@@ -12,5 +12,8 @@ namespace Windows
         MoneyWindow,
         PlaceBetWindow,
         ShopWindow,
+        MoneyBonusWindow,
+        EnableNotificationRequestWindow,
+        RewardGivenWindow,
     }
 }

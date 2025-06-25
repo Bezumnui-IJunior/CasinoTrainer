@@ -14,6 +14,8 @@ using Features.Player;
 using Features.View;
 using GameStates;
 using Infrastructure;
+using Monetization;
+using Notifications;
 using Progress;
 using Scellecs.Morpeh;
 using Sounds;
@@ -69,12 +71,15 @@ public class GameScope : LifetimeScope
         builder.Register<BootstrapState>(Lifetime.Singleton);
         builder.Register<SetupMusicState>(Lifetime.Singleton);
         builder.Register<MainMenuState>(Lifetime.Singleton);
+        builder.Register<ActualizeState>(Lifetime.Singleton);
         builder.Register<BlackJackStartState>(Lifetime.Singleton);
         builder.Register<BlackJackRunningState>(Lifetime.Singleton);
     }
 
     private void RegisterServices(IContainerBuilder builder)
     {
+        RegisterCoroutineExecutor(builder);
+        builder.RegisterInstance(PlayerData.LoadOrDefault()).As<IPlayerData>();
         builder.Register<Instantilizer>(Lifetime.Singleton).As<IInstantilizer>();
         builder.Register<SceneFactory>(Lifetime.Singleton).As<ISceneFactory>();
         builder.Register<WindowsManager>(Lifetime.Singleton).As<IWindowsManager>();
@@ -83,7 +88,9 @@ public class GameScope : LifetimeScope
         builder.Register<ScoreCalculator>(Lifetime.Singleton).As<IScoreCalculator>();
         builder.Register<Indexer>(Lifetime.Singleton).As<IIndexer>();
         builder.Register<BackgroundMusic>(Lifetime.Singleton).As<IBackgroundMusic>();
-        builder.RegisterInstance(PlayerData.LoadOrDefault()).As<IPlayerData>();
+        builder.Register<NotificationService>(Lifetime.Singleton).As<INotificationService>();
+        builder.Register<MoneyAdvertService>(Lifetime.Singleton).As<IMoneyAdvertService>();
+        builder.RegisterInstance(new MonetizationService()).As<IMonetizationService>();
     }
 
     private void RegisterFeatures(IContainerBuilder builder)
@@ -104,11 +111,21 @@ public class GameScope : LifetimeScope
         builder.Register<DeckFactory>(Lifetime.Singleton).As<IDeckFactory>();
         builder.Register<GameOverFactory>(Lifetime.Singleton).As<IGameOverFactory>();
         builder.Register<PlayerFactory>(Lifetime.Singleton).As<IPlayerFactory>();
+        builder.Register<NotificationsFactory>(Lifetime.Singleton).As<INotificationsFactory>();
     }
 
     private void RegisterView(IContainerBuilder builder)
     {
         builder.Register<DealerCollectAnimation>(Lifetime.Singleton).As<IDealerCollectAnimation>();
         builder.Register<PlayerCollectAnimation>(Lifetime.Singleton).As<IPlayerCollectAnimation>();
+    }
+
+    private void RegisterCoroutineExecutor(IContainerBuilder builder)
+    {
+        CoroutineExecutor obj = new GameObject().AddComponent<CoroutineExecutor>();
+
+        obj.gameObject.name = nameof(CoroutineExecutor);
+        DontDestroyOnLoad(obj.gameObject);
+        builder.RegisterInstance(obj).As<ICoroutineExecutor>();
     }
 }

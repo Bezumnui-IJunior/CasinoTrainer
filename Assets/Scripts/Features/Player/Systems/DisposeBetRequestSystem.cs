@@ -20,7 +20,7 @@ namespace Features.Player.Systems
                 .With<PlaceBetRequest>()
                 .Without<DisposingTag>()
                 .Build();
-            
+
             _disposingTag = World.GetStash<DisposingTag>();
         }
 

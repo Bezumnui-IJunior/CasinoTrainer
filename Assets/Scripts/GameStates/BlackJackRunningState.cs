@@ -1,7 +1,9 @@
+using System;
 using System.Linq;
 using Windows;
 using Features.Common.Components;
 using Infrastructure;
+using Progress;
 using Scellecs.Morpeh;
 using Unity.IL2CPP.CompilerServices;
 
@@ -15,6 +17,8 @@ namespace GameStates
         private readonly BlackJackFeatures _blackJackFeatures;
         private readonly Stash<DisposingTag> _disposingTag;
         private readonly IWindowsManager _windowsManager;
+        private readonly ISettings _settings;
+        private readonly IPlayerData _playerData;
         private readonly World _world;
 
         public BlackJackRunningState(
@@ -38,6 +42,7 @@ namespace GameStates
                 WindowsId.PlaceBetWindow,
                 WindowsId.MoneyWindow
             );
+            
         }
 
         public override void Exit()
@@ -46,6 +51,7 @@ namespace GameStates
             _world.CleanupUpdate(0);
             _blackJackFeatures.RemoveFeatures();
         }
+        
 
         private void Unload()
         {

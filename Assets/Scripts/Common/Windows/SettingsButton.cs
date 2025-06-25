@@ -3,6 +3,7 @@ using Common.Settings;
 using Progress;
 using Sounds;
 using Unity.IL2CPP.CompilerServices;
+using Unity.Services.LevelPlay;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer;
@@ -15,26 +16,23 @@ namespace Common.Windows
     public class SettingsButton : Window
     {
         private const float DebugAddMoneyValue = 100;
-        [SerializeField] private Button _exitButtonUI;
-        [SerializeField] private Button _addMoneyButton;
+        [SerializeField] private ExitButton _exitButton;
+        [SerializeField] private Button _debugButton;
         [SerializeField] private Slider _musicSliderUI;
 
-        private ExitButton _exitButton;
         private MusicSlider _musicSlider;
         private IPlayerData _playerData;
 
         private void OnEnable()
         {
-            _addMoneyButton.onClick.AddListener(OnAddMoneyClicked);
+            _debugButton.onClick.AddListener(OnDebugClicked);
             _musicSlider.Enable();
-            _exitButton.Enable();
         }
 
         private void OnDisable()
         {
-            _addMoneyButton.onClick.RemoveListener(OnAddMoneyClicked);
+            _debugButton.onClick.RemoveListener(OnDebugClicked);
             _musicSlider.Disable();
-            _exitButton.Disable();
         }
 
         protected override void OnUpdate()
@@ -43,17 +41,16 @@ namespace Common.Windows
         }
 
         [Inject]
-        private void Construct(ISettings settings, IWindowsManager windowsManager, IPlayerData playerData, IBackgroundMusic backgroundMusic)
+        private void Construct(ISettings settings, IPlayerData playerData, IBackgroundMusic backgroundMusic, IObjectResolver resolver)
         {
             _playerData = playerData;
             _musicSlider = new MusicSlider(_musicSliderUI, settings, backgroundMusic);
-            _exitButton = new ExitButton(settings, windowsManager, _exitButtonUI, WindowsId.SettingsWindow);
+            resolver.Inject(_exitButton);
         }
 
-        private void OnAddMoneyClicked()
+        private void OnDebugClicked()
         {
-            _playerData.PlayerMoney += DebugAddMoneyValue;
-            _playerData.Save();
+            LevelPlay.LaunchTestSuite();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Features.Card.Services
         private const float CardHeight = 0.0012f;
 
         private static readonly Vector3 SpawnPosition = new Vector3(-1.429f, 0.001f + CardHeight * 52, 0.462f);
-       
+
         private readonly Stash<ChangePositionComponent> _changePositionComponent;
         private readonly Stash<DenominalComponent> _denominal;
         private readonly Stash<OrderComponent> _order;
